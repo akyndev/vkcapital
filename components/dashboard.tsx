@@ -155,12 +155,12 @@ const Dashboard = () => {
 							</div>
 						</div>
 					</div>
-					<div className="bg-white rounded-lg p-6 h-max lg:h-full flex flex-col">
+					<div className="bg-white rounded-lg p-6 h-80 lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">
 							<h3 className="font-extrabold text-xl">Investment</h3>
 							<MoreHorizontal />
 						</div>
-						<div className="flex-1 h-56 lg:h-auto">
+						<div className="flex-1 lg:h-auto">
 							<Chart />
 						</div>
 					</div>
