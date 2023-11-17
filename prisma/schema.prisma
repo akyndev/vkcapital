@@ -28,6 +28,8 @@ model Transaction {
     user   User             @relation(fields: [userId], references: [id])
     type   TransactionTypes
     amount Int
+
+    @@map("transactions")
 }
 
 enum TransactionTypes {
