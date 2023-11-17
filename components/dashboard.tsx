@@ -165,7 +165,7 @@ const Dashboard = ({ data }: { data: User }) => {
 					</div>
 					<div className="bg-white rounded-lg p-6 lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="font-extrabold text-xl">Investment</h3>
+							<h3 className="font-extrabold text-xl">Deposit Calculator</h3>
 							<MoreHorizontal />
 						</div>
 						<div className="flex-1">
