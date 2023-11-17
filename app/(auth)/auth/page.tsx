@@ -26,10 +26,17 @@ const Auth = () => {
 							height={400}
 							className="h-full w-full object-cover"
 						/>
-						<p className="text-black font-medium text-lg absolute bottom-8 right-4 left-32" >
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam
-							aperiam odit corporis perspiciatis eaque facere quisquam error ad?
-							
+						<p className="text-black font-medium text-lg absolute bottom-8 right-4 left-32">
+							VK Capital is an innovative investment platform designed to
+							empower investors in achieving their financial goals. This
+							user-friendly platform enables individuals to save and invest with
+							a specific focus, whether it be starting a business, planning for
+							retirement, or funding their child&apos;s college education. VK
+							Capital provides a streamlined and accessible avenue for users to
+							grow their wealth through strategic investments. With a range of
+							investment options and personalized goal-setting features, VK
+							Capital aims to make financial planning and wealth accumulation
+							more accessible and tailored to individual aspirations.
 						</p>
 					</div>
 					<div className="h-screen w-full flex flex-col items-center justify-between py-8">
@@ -48,8 +55,9 @@ const Auth = () => {
 									{!form ? "Welcome Back" : "Get Started"}
 								</h1>
 								<p>
-									Lorem ipsum dolor sit, amet consectetur <br /> adipisicing
-									elitr
+									{!form
+										? "Seize the opportunity to grow your future wealth and financial security."
+										: "The best time to plant a tree was 20 years ago. The second-best time is now. Similarly, the best time to start investing was yesterday, but the next best time is today."}
 								</p>
 							</div>
 							<AuthForm form={Boolean(form)} setForm={setForm} />
