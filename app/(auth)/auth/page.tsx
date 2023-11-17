@@ -54,7 +54,7 @@ const Auth = () => {
 								<h1 className="text-4xl font-semibold tracking-tighter">
 									{!form ? "Welcome Back" : "Get Started"}
 								</h1>
-								<p className="max-w-96">
+								<p className="max-w-96 text-sm lg:text-base">
 									{!form
 										? "Seize the opportunity to grow your future wealth and financial security."
 										: "The best time to plant a tree was 20 years ago. The second-best time is now. Similarly, the best time to start investing was yesterday, but the next best time is today."}
