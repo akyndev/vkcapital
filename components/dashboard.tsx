@@ -25,15 +25,16 @@ const Dashboard = ({ data }: { data: User }) => {
 				monthly: 0,
 				yearly: 0,
 			})
+		} else {
+			const yearly = (plan / 100) * amount
+			const monthly = yearly / 12
+			const daily = monthly / 30
+			setInterest({
+				daily,
+				monthly,
+				yearly,
+			})
 		}
-		const yearly = (plan / 100) * amount
-		const monthly = yearly / 12
-		const daily = monthly / 30
-		setInterest({
-			daily,
-			monthly,
-			yearly,
-		})
 	}, [plan, amount])
 
 	const calIn = (num: number) => {
