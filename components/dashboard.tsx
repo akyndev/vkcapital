@@ -10,7 +10,7 @@ import { cn, formattedValue } from "@/lib/utils"
 import type { User } from "@/lib/types"
 
 const Dashboard = ({ data }: { data: User }) => {
-	const [amount, setAmount] = useState(100)
+	const [amount, setAmount] = useState(1000)
 	const [plan, setPlan] = useState(20)
 	const [interest, setInterest] = useState({
 		daily: 0.0,
