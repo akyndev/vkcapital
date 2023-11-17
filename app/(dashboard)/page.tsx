@@ -27,7 +27,11 @@ export default function Home() {
 	}
 
 	if (!parsedUser.success) {
-		return <p>Failed</p>
+		return (
+			<main className="relative container lg:px-8">
+				<DashboardLoader />
+			</main>
+		)
 	}
 
 	return (
