@@ -28,26 +28,38 @@ const AuthForm = ({
 
 	const { data, status } = useSession()
 	const router = useRouter()
-	const [loggingIn, setLoggingIn] = useState(false)
+	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
 
-	useEffect(() => {
-		if (status !== "loading" && status === "authenticated") {
-			router.push("/")
+
+
+	const onSumbit = (e: Auth) => {
+		setLoading(true)
+		if (!form) {
+			signIn("credentials", {
+				email: e.email,
+				password: e.password,
+			})
+			setLoading(false)
+		} else {
+			fetch("/api/register", {
+				method: "POST",
+				body: JSON.stringify(e),
+			})
+				.then((res) => res.json())
+				.then(() => {
+					signIn("credentials", {
+						email: e.email,
+						password: e.password,
+					}),
+						setLoading(false)
+				})
 		}
-	}, [status])
+	}
 
 	return (
 		<form
-			onSubmit={handleSubmit((e) => {
-				setLoggingIn(true)
-				signIn("credentials", {
-					name: e.name,
-					email: e.email,
-					password: e.password,
-				})
-				setLoggingIn(false)
-			})}
+			onSubmit={handleSubmit(onSumbit)}
 			className="lg:w-96 w-full mx-auto space-y-4">
 			{form ? (
 				<>
@@ -107,9 +119,9 @@ const AuthForm = ({
 
 			<Button disabled={status === "loading"} className="w-full">
 				{!form ? (
-					<span>{loggingIn ? "Signing in..." : "Sign in"}</span>
+					<span>{loading ? "Signing in..." : "Sign in"}</span>
 				) : (
-					<span>{loggingIn ? "Signing up..." : "Sign up"}</span>
+					<span>{loading ? "Signing up..." : "Sign up"}</span>
 				)}
 			</Button>
 
@@ -123,7 +135,7 @@ const AuthForm = ({
 							reset()
 							setForm(true)
 						}}
-						className="py-0 h-max text-green-700 hover:bg-transparent hover:text-green-700 px-1">
+						className="py-0 h-max text-[#C5AA17] hover:bg-transparent hover:text-[#C5AA17] px-1">
 						Create an account
 					</Button>
 				</p>
@@ -137,7 +149,7 @@ const AuthForm = ({
 							reset()
 							setForm(false)
 						}}
-						className="py-0 h-max text-green-500 hover:bg-transparent hover:text-green-700 px-1">
+						className="py-0 h-max text-[#C5AA17] hover:bg-transparent hover:text-[#C5AA17] px-1">
 						Sign in
 					</Button>
 				</p>

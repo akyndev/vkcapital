@@ -16,7 +16,7 @@ const DashboardLoader = () => {
 							last interest
 						</p>
 						<div className="mt-3  space-x-2">
-							<Button className="rounded-full w-32 bg-[#369A40]">Top up</Button>
+							<Button className="rounded-full w-32 ">Top up</Button>
 							<Button
 								className="rounded-full w-32 text-[#369A40]"
 								variant={"outline"}>
@@ -31,7 +31,7 @@ const DashboardLoader = () => {
 								Premium
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
-								+ $24.65
+								<Skeleton className="h-10 w-12" />
 							</h2>
 						</div>
 						<div className="mt-3  space-x-4 flex items-center">
@@ -39,7 +39,7 @@ const DashboardLoader = () => {
 								Diamond
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
-								+ $94.89
+								<Skeleton className="h-10 w-12" />
 							</h2>
 						</div>
 					</div>

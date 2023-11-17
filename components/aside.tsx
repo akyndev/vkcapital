@@ -24,13 +24,15 @@ const Aside = () => {
 				</div>
 				<nav className="flex-1 w-full">
 					<ul className="w-full flex flex-col space-y-3">
-						<li className="font-medium w-full text-white py-3 rounded-lg bg-[#369A40]">
-							<Link href={"/"} className="flex items-center justify-start px-6 space-x-3">
+						<li className="font-medium w-full text-white py-3 rounded-lg bg-[#C5AA17]">
+							<Link
+								href={"/"}
+								className="flex items-center justify-start px-6 space-x-3">
 								<LayoutDashboard className="" fill="white" color="white" />
 								<span className="hidden lg:block">Dashboard</span>
 							</Link>
 						</li>
-						<li className="font-medium w-full py-3 rounded-lg">
+						{/* <li className="font-medium w-full py-3 rounded-lg">
 							<Link
 								href={"/"}
 								className="flex items-center justify-start px-6 space-x-3">
@@ -49,7 +51,7 @@ const Aside = () => {
 								<LayoutDashboard className="" />
 								<span className="hidden lg:block">Subscribtons</span>
 							</Link>
-						</li>
+						</li> */}
 					</ul>
 				</nav>
 				<div className="w-full pb-4">
