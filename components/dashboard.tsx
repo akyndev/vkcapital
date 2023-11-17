@@ -65,6 +65,21 @@ const Dashboard = ({ data }: { data: User }) => {
 							<Button
 								className="rounded-full w-56"
 								variant={
+									data.balance < 1000
+										? "default"
+										: "outline"
+								}>
+								Basic
+							</Button>
+							<h2 className="text-xl text-[#369A40] font-extrabold">
+								+ {formattedValue(calIn(30))}{" "}
+								<small className="text-black font-normal">yearly</small>
+							</h2>
+						</div>
+						<div className="mt-3  space-x-4 flex items-center">
+							<Button
+								className="rounded-full w-56"
+								variant={
 									data.balance >= 1000 && data.balance <= 4999
 										? "default"
 										: "outline"

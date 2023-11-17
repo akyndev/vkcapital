@@ -28,6 +28,14 @@ const DashboardLoader = () => {
 						<h2 className="text-xl font-extrabold mb-3">Plan</h2>
 						<div className="mt-3  space-x-4 flex items-center">
 							<Button className="rounded-full w-56" variant={"outline"}>
+								Basic
+							</Button>
+							<h2 className="text-xl text-[#369A40] font-extrabold">
+								<Skeleton className="h-10 w-12" />
+							</h2>
+						</div>
+						<div className="mt-3  space-x-4 flex items-center">
+							<Button className="rounded-full w-56" variant={"outline"}>
 								Premium
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
