@@ -7,7 +7,7 @@ import { userSchema } from "@/prisma/schema"
 import { User } from "@/lib/types"
 import useSwr from "swr"
 
-const fetcher = (...rest: unknown[]) =>
+const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET" }).then((res) => res.json())
 
 export default function Home() {

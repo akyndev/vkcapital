@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import Chart from "./chart"
 import { ArrowDown, ArrowUp, MoreHorizontal } from "lucide-react"
 import { Button } from "./ui/button"
@@ -18,7 +18,7 @@ const Dashboard = ({ data }: { data: User }) => {
 		yearly: 0.0,
 	})
 
-	const cal = () => {
+	const cal = useCallback(() => {
 		const yearly = (plan / 100) * amount
 		const monthly = yearly / 12
 		const daily = monthly / 30
@@ -27,7 +27,7 @@ const Dashboard = ({ data }: { data: User }) => {
 			monthly,
 			yearly,
 		})
-	}
+	}, [plan, amount])
 
 	const calIn = (num: number) => {
 		return (num / 100) * data.balance
@@ -35,7 +35,7 @@ const Dashboard = ({ data }: { data: User }) => {
 
 	useEffect(() => {
 		cal()
-	}, [plan, amount])
+	}, [plan, amount, cal])
 
 	return (
 		<div className="w-full h-screen flex items-start space-x-0">
@@ -128,7 +128,9 @@ const Dashboard = ({ data }: { data: User }) => {
 								))}
 							</div>
 						) : (
-							<p className="w-full h-full flex items-center justify-center text-xl">No recent transaction</p>
+							<p className="w-full h-full flex items-center justify-center text-xl">
+								No recent transaction
+							</p>
 						)}
 					</div>
 					<div className="bg-white rounded-lg p-6 lg:h-full flex flex-col">
