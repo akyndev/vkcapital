@@ -7,7 +7,6 @@ generator client {
     provider = "prisma-client-js"
 }
 
-
 model User {
     id            String        @id @default(auto()) @map("_id") @db.ObjectId
     name          String?
@@ -17,7 +16,7 @@ model User {
     image         String?
     balance       Int           @default(0)
     interest      Int           @default(0)
-    plan          String?
+    plan          Plan          @default(BASIC)
     transactions  Transaction[]
 
     @@map("users")
@@ -34,4 +33,11 @@ model Transaction {
 enum TransactionTypes {
     TOPUP
     WITHDRAW
+}
+
+enum Plan {
+    BASIC
+    STANDARD
+    PREMIUM
+    EXCLUSIVE
 }

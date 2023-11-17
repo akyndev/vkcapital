@@ -15,7 +15,7 @@ export const userSchema = z.object({
 	image: z.string().nullable(),
 	balance: z.number(),
 	interest: z.number(),
-	plan: z.string().nullable(),
+	plan: z.enum(["BASIC", "STANDARD", "PREMIUM", "EXCLUSIVE"]),
 	password: z.string().nullable(),
 	transactions: z.array(
 		z.object({

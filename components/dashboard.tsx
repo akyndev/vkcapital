@@ -58,6 +58,13 @@ const Dashboard = ({ data }: { data: User }) => {
 								Withdraw
 							</Button>
 						</div>
+
+						<div className="mt-3">
+							<h2 className=" font-semibold">{data.plan}</h2>
+							<p className="text-sm capitalize text-muted-foreground font-medium">
+								Current Plan
+							</p>
+						</div>
 					</div>
 					<div className="bg-white rounded-lg  p-6">
 						<h2 className="text-xl font-extrabold mb-3">Plan</h2>
@@ -65,14 +72,14 @@ const Dashboard = ({ data }: { data: User }) => {
 							<Button
 								className="rounded-full w-56"
 								variant={
-									data.balance < 1000
+									data.balance >= 1000 && data.balance <= 4999
 										? "default"
 										: "outline"
 								}>
-								Basic
+								Standard
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
-								+ {formattedValue(calIn(30))}{" "}
+								+ {formattedValue(calIn(20))}{" "}
 								<small className="text-black font-normal">yearly</small>
 							</h2>
 						</div>
@@ -80,7 +87,7 @@ const Dashboard = ({ data }: { data: User }) => {
 							<Button
 								className="rounded-full w-56"
 								variant={
-									data.balance >= 1000 && data.balance <= 4999
+									data.balance >= 5000 && data.balance <= 9999
 										? "default"
 										: "outline"
 								}>
@@ -94,8 +101,8 @@ const Dashboard = ({ data }: { data: User }) => {
 						<div className="mt-3  space-x-4 flex items-center">
 							<Button
 								className="rounded-full w-56"
-								variant={data.balance > 5000 ? "default" : "outline"}>
-								Diamond
+								variant={data.balance > 10000 ? "default" : "outline"}>
+								Exclusive
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
 								+ {formattedValue(calIn(40))}{" "}
@@ -193,7 +200,7 @@ const Dashboard = ({ data }: { data: User }) => {
 										"bg-[#C5AA17] text-white": plan === 20,
 									})}
 									variant={"outline"}>
-									Basic
+									Standard
 								</Button>
 								<Button
 									onClick={() => {
@@ -213,7 +220,7 @@ const Dashboard = ({ data }: { data: User }) => {
 										"bg-[#C5AA17] text-white": plan === 40,
 									})}
 									variant={"outline"}>
-									Diamond
+									Exclusive
 								</Button>
 							</div>
 							<p>

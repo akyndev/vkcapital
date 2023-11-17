@@ -20,7 +20,6 @@ const Aside = () => {
 						height={100}
 						className="h-auto w-16"
 					/>
-					<p className="text-xl italic ml-2 hidden lg:block">vkcapitals</p>
 				</div>
 				<nav className="flex-1 w-full">
 					<ul className="w-full flex flex-col space-y-3">
