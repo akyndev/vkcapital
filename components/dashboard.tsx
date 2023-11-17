@@ -19,6 +19,13 @@ const Dashboard = ({ data }: { data: User }) => {
 	})
 
 	const cal = useCallback(() => {
+		if (amount <= 999) {
+			setInterest({
+				daily: 0,
+				monthly: 0,
+				yearly: 0,
+			})
+		}
 		const yearly = (plan / 100) * amount
 		const monthly = yearly / 12
 		const daily = monthly / 30

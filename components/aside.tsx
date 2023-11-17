@@ -31,7 +31,7 @@ const Aside = () => {
 								<span className="hidden lg:block">Dashboard</span>
 							</Link>
 						</li>
-						{/* <li className="font-medium w-full py-3 rounded-lg">
+						<li className="font-medium w-full py-3 rounded-lg">
 							<Link
 								href={"/"}
 								className="flex items-center justify-start px-6 space-x-3">
@@ -50,7 +50,7 @@ const Aside = () => {
 								<LayoutDashboard className="" />
 								<span className="hidden lg:block">Subscribtons</span>
 							</Link>
-						</li> */}
+						</li>
 					</ul>
 				</nav>
 				<div className="w-full pb-4">
