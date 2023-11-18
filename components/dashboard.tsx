@@ -113,7 +113,7 @@ const Dashboard = ({ data }: { data: User }) => {
 						<div className="mt-3  space-x-4 flex items-center">
 							<Button
 								className="rounded-full w-56"
-								variant={data.balance > 10000 ? "default" : "outline"}>
+								variant={data.balance >= 10000 ? "default" : "outline"}>
 								Exclusive
 							</Button>
 							<h2 className="text-xl text-[#369A40] font-extrabold">
