@@ -1,19 +1,29 @@
 import { prisma } from "@/lib/authOptions"
-import { User } from "@/lib/types"
-import { formattedValue } from "@/lib/utils"
 import { userSchema } from "@/prisma/schema"
-import dynamic from "next/dynamic"
-import React from "react"
+import * as d from "next/dynamic"
 import { z } from "zod"
 
 const Users = z.array(userSchema)
 
-const Table = dynamic(() => import("../../../../components/table"), {
+const Table = d.default(() => import("../../../../components/table"), {
 	ssr: false,
 })
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+export const fetchCache = "force-no-store"
+
+async function getAllUsers() {
+	try {
+		const users = await prisma.user.findMany({})
+		return users
+	} catch (error) {
+		console.log(error)
+	}
+}
+
 async function AdminDashboard() {
-	const users = await prisma.user.findMany({})
+	const users = await getAllUsers()
 
 	const pUsers = Users.safeParse(users)
 
