@@ -17,14 +17,14 @@ model User {
     balance       Int           @default(0)
     interest      Int           @default(0)
     plan          Plan          @default(BASIC)
-    transactions  Transaction[]
+    transactions  Transaction[] 
 
     @@map("users")
 }
 
 model Transaction {
     id     String           @id @default(auto()) @map("_id") @db.ObjectId
-    userId String           @db.ObjectId
+    userId String           @db.ObjectId @unique
     user   User             @relation(fields: [userId], references: [id])
     type   TransactionTypes
     amount Int

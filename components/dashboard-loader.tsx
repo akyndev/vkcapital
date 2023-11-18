@@ -52,36 +52,7 @@ const DashboardLoader = () => {
 						</div>
 					</div>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-					<div className="bg-white rounded-lg p-6">
-						<h4 className="text-muted-foreground text-sm font-medium">
-							Total Income
-						</h4>
-						<Skeleton className="h-6 w-32 my-3" />
-						<Skeleton className="h-8 w-16 rounded-full" />
-					</div>
-					<div className="bg-white rounded-lg p-6">
-						<h4 className="text-muted-foreground text-sm font-medium">
-							Total Income
-						</h4>
-						<Skeleton className="h-6 w-32 my-3" />
-						<Skeleton className="h-8 w-16 rounded-full" />
-					</div>
-					<div className="bg-white rounded-lg p-6">
-						<h4 className="text-muted-foreground text-sm font-medium">
-							Total Income
-						</h4>
-						<Skeleton className="h-6 w-32 my-3" />
-						<Skeleton className="h-8 w-16 rounded-full" />
-					</div>
-					<div className="bg-white rounded-lg p-6">
-						<h4 className="text-muted-foreground text-sm font-medium">
-							Total Income
-						</h4>
-						<Skeleton className="h-6 w-32 my-3" />
-						<Skeleton className="h-8 w-16 rounded-full" />
-					</div>
-				</div>
+				
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					<div className="bg-white rounded-lg p-6">
 						<div className="flex items-center justify-between mb-3">

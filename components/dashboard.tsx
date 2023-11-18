@@ -1,6 +1,5 @@
 "use client"
 import React, { useCallback, useEffect, useState } from "react"
-import Chart from "./chart"
 import { ArrowDown, ArrowUp, MoreHorizontal } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -8,6 +7,7 @@ import { Separator } from "./ui/separator"
 import { Label } from "./ui/label"
 import { cn, formattedValue } from "@/lib/utils"
 import type { User } from "@/lib/types"
+import Link from "next/link"
 
 const Dashboard = ({ data }: { data: User }) => {
 	const [amount, setAmount] = useState(1000)
@@ -59,12 +59,16 @@ const Dashboard = ({ data }: { data: User }) => {
 							last interest
 						</p>
 						<div className="mt-3  space-x-2">
-							<Button className="rounded-full w-32">Top up</Button>
-							<Button
-								className="rounded-full w-32 text-[#C5AA17]"
-								variant={"outline"}>
-								Withdraw
-							</Button>
+							<Link target="_blank" href={"https://telegram.me/VKFinanceSA"}>
+								<Button className="rounded-full w-32">Top up</Button>
+							</Link>
+							<Link target="_blank" href={"https://telegram.me/VKFinanceSA"}>
+								<Button
+									className="rounded-full w-32 text-[#C5AA17]"
+									variant={"outline"}>
+									Withdraw
+								</Button>
+							</Link>
 						</div>
 
 						<div className="mt-3">

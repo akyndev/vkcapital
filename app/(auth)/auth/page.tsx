@@ -50,7 +50,7 @@ const Auth = () => {
 							)}
 						</div>
 						<div className="text-center flex-1 items-center justify-center flex flex-col">
-							<div className="mx-auto w-max my-6">
+							<div className="mx-auto w-full lg:w-max my-6">
 								<h1 className="text-4xl font-semibold tracking-tighter">
 									{!form ? "Welcome Back" : "Get Started"}
 								</h1>

@@ -1,4 +1,3 @@
-// import Table from "@/components/table"
 import { prisma } from "@/lib/authOptions"
 import { User } from "@/lib/types"
 import { formattedValue } from "@/lib/utils"
@@ -152,7 +151,7 @@ const allUser: User[] = [
 	},
 ]
 
-const Table = dynamic(() => import("../../../components/table"), { ssr: false })
+const Table = dynamic(() => import("../../../../components/table"), { ssr: false })
 
 async function AdminDashboard() {
 	// const allUser = await prisma.user.findMany()
@@ -161,7 +160,7 @@ async function AdminDashboard() {
 		<main className="relative container lg:px-8">
 			<div className="w-full h-screen flex items-start space-x-0">
 				<div className="sm:w-32 lg:w-64 h-screen lg:block" />
-					thdhdfghdfghd
+				<Table allUser={allUser} />
 			</div>
 		</main>
 	)

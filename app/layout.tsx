@@ -3,6 +3,7 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Mulish } from "next/font/google"
 import { cn } from "@/lib/utils"
+import ReduxProvider from "@/provider/redux"
 
 const inter = Mulish({ subsets: ["latin"] })
 
@@ -18,9 +19,11 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={cn("bg-gray-100", inter.className)}>
-				<Session>{children}</Session>
+				<ReduxProvider>
+					<Session>{children}</Session>
+				</ReduxProvider>
 			</body>
 		</html>
 	)

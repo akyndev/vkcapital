@@ -76,4 +76,10 @@
 	.dashboard::-webkit-scrollbar {
 		display: none;
 	}
+	th {
+		@apply pb-3;
+	}
+	td {
+		@apply py-3;
+	}
 }
