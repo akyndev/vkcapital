@@ -14,7 +14,7 @@ export const txSchema = z.object({
 	userId: z.string(),
 	type: TransactionTypesEnum,
 	amount: z.number(),
-	createdAt: z.date(),
+	createdAt: z.union([z.date(), z.string().datetime(), z.string()]),
 })
 
 export const userSchema = z.object({
