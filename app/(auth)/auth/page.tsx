@@ -31,7 +31,7 @@ const Auth = () => {
 							empower investors in achieving their financial goals. This
 							user-friendly platform enables individuals to save and invest with
 							a specific focus, whether it be starting a business, planning for
-							retirement, or funding their child&apos;s college education. VK
+							retirement, or funding their child&apos;s future. VK
 							Capital provides a streamlined and accessible avenue for users to
 							grow their wealth through strategic investments. With a range of
 							investment options and personalized goal-setting features, VK
