@@ -8,7 +8,7 @@ const initialState: CounterSliceState = {
 }
 
 export const counterSlice = createSlice({
-	name: "counter",
+	name: "app",
 
 	initialState,
 	// The `reducers` field lets us define reducers and generate associated actions
@@ -26,20 +26,14 @@ export const counterSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(createTx.pending, (state) => {
-				state.status = "loading"
-			})
 			.addCase(createTx.fulfilled, (state, action) => {
 				state.status = "idle"
 				state.value += action.payload
 			})
-			.addCase(updateUser.pending, (state) => {
-				state.status = "loading"
-			})
-			.addCase(updateUser.fulfilled, (state, action) => {
-				state.status = "idle"
-				state.value += action.payload
-			})
+			// .addCase(updateUser.fulfilled, (state, action) => {
+			// 	state.status = "idle"
+			// 	state.value += action.payload
+			// })
 	},
 })
 
