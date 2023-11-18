@@ -1,13 +1,13 @@
 "use client"
-import React, { useCallback, useEffect, useState } from "react"
+import type { User } from "@/lib/types"
+import { cn, formattedValue } from "@/lib/utils"
 import { ArrowDown, ArrowUp, MoreHorizontal } from "lucide-react"
+import Link from "next/link"
+import { useCallback, useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import { Separator } from "./ui/separator"
 import { Label } from "./ui/label"
-import { cn, formattedValue } from "@/lib/utils"
-import type { User } from "@/lib/types"
-import Link from "next/link"
+import { Separator } from "./ui/separator"
 
 const Dashboard = ({ data }: { data: User }) => {
 	const [amount, setAmount] = useState(1000)
