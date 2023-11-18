@@ -25,7 +25,7 @@ const Table = ({ allUser }: { allUser: User[] }) => {
 					{allUser.map((user) => (
 						<tr
 							key={user.id}
-							onClick={() => router.push(`/admin/users/${user.id}`)}
+							onClick={() => router.push(`/admin/users/${user.email}`)}
 							className="border-b font-medium text-sm border-gray-200 hover:bg-gray-100 transition-all duration-300 cursor-pointer">
 							<td className="pl-2">{user.name}</td>
 							<td>{user.email}</td>
