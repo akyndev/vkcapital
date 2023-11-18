@@ -1,15 +1,10 @@
 "use client"
-import { useSession } from "next-auth/react"
 import Dashboard from "@/components/dashboard"
 import DashboardLoader from "@/components/dashboard-loader"
-import React, { useEffect } from "react"
-import { userSchema } from "@/prisma/schema"
 import { User } from "@/lib/types"
+import { userSchema } from "@/prisma/schema"
+import { useSession } from "next-auth/react"
 import useSwr from "swr"
-
-type ExtendedUser = User & {
-	id: string
-}
 
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET" }).then((res) => res.json())
@@ -45,7 +40,7 @@ export default function Home() {
 
 	return (
 		<main className="relative container lg:px-8">
-			{status === "loading" ? (
+			{status === "loading" && isLoading ? (
 				<>
 					<DashboardLoader />
 				</>

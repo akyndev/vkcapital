@@ -130,42 +130,48 @@ const Dashboard = ({ data }: { data: User }) => {
 							<h3 className="font-extrabold text-xl">Latest transactions</h3>
 							<MoreHorizontal />
 						</div>
-						{data.transactions.length > 0 ? (
-							<div className="space-y-4">
-								{data.transactions.map((d, i) => (
-									<div key={i} className="flex items-start space-x-4">
-										{d.type === "TOPUP" ? (
-											<div className="flex w-max p-3 text-sm items-center justify-center text-[#369A40] rounded-full space-x-2 bg-green-400/20">
-												<ArrowUp size={16} className="" />
+						{data.transactions ? (
+							<>
+								{data.transactions.length > 0 ? (
+									<div className="space-y-4">
+										{data.transactions.map((d, i) => (
+											<div key={i} className="flex items-start space-x-4">
+												{d.type === "TOPUP" ? (
+													<div className="flex w-max p-3 text-sm items-center justify-center text-[#369A40] rounded-full space-x-2 bg-green-400/20">
+														<ArrowUp size={16} className="" />
+													</div>
+												) : (
+													<div className="flex w-max p-3 text-sm items-center justify-center text-[#9a3636] rounded-full space-x-2 bg-red-400/20">
+														<ArrowDown size={16} className="" />
+													</div>
+												)}
+												<div className="flex-1">
+													<h4 className="font-bold">
+														{d.type === "TOPUP"
+															? "Balance Top up"
+															: "Withdrawal"}
+													</h4>
+													<p className="text-xs text-muted-foreground">
+														Personal Payment
+													</p>
+												</div>
+												<h3
+													className={cn("font-extrabold text-destructive", {
+														"text-[#369A40]": d.type === "TOPUP",
+													})}>
+													{d.type === "TOPUP" ? "+" : "-"}
+													{formattedValue(d.amount)}
+												</h3>
 											</div>
-										) : (
-											<div className="flex w-max p-3 text-sm items-center justify-center text-[#9a3636] rounded-full space-x-2 bg-red-400/20">
-												<ArrowDown size={16} className="" />
-											</div>
-										)}
-										<div className="flex-1">
-											<h4 className="font-bold">
-												{d.type === "TOPUP" ? "Balance Top up" : "Withdrawal"}
-											</h4>
-											<p className="text-xs text-muted-foreground">
-												Personal Payment
-											</p>
-										</div>
-										<h3
-											className={cn("font-extrabold text-destructive", {
-												"text-[#369A40]": d.type === "TOPUP",
-											})}>
-											{d.type === "TOPUP" ? "+" : "-"}
-											{formattedValue(d.amount)}
-										</h3>
+										))}
 									</div>
-								))}
-							</div>
-						) : (
-							<p className="w-full h-full flex items-center justify-center text-xl">
-								No recent transaction
-							</p>
-						)}
+								) : (
+									<p className="w-full h-full flex items-center justify-center text-xl">
+										No recent transaction
+									</p>
+								)}
+							</>
+						) : null}
 					</div>
 					<div className="bg-white rounded-lg p-6 lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">

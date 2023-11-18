@@ -1,4 +1,7 @@
 "use client"
+import { updateUser, useDispatch, useSelector } from "@/lib/redux"
+import { selectUserClose, selectUserStatus } from "@/lib/redux/slices/selectors"
+import { Loader2 } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import {
@@ -21,9 +24,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select"
-import { updateUser, useDispatch, useSelector } from "@/lib/redux"
-import { Loader2 } from "lucide-react"
-import { selectUserClose, selectUserStatus } from "@/lib/redux/slices/selectors"
 
 const AdminForm = ({ email }: { email: string }) => {
 	const [user, setUser] = useState<{
