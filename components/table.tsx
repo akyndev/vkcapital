@@ -28,7 +28,7 @@ const Table = ({ allUser }: { allUser: User[] }) => {
 							onClick={() => router.push(`/admin/users/${user.email}`)}
 							className="border-b font-medium text-sm border-gray-200 hover:bg-gray-100 transition-all duration-300 cursor-pointer">
 							<td className="pl-2">{user.name}</td>
-							<td>{user.email}</td>
+							<td className="lowercase">{user.email}</td>
 							<td className="font-bold">{formattedValue(user.balance)}</td>
 							<td className="text-[#37e237] font-bold">{user.interest}</td>
 							<td>{user.plan}</td>
