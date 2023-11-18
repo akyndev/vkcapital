@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import {
 	Dialog,
@@ -21,20 +21,41 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select"
+import { updateUser, useDispatch, useSelector } from "@/lib/redux"
+import { Loader2 } from "lucide-react"
+import { selectUserClose, selectUserStatus } from "@/lib/redux/slices/selectors"
 
-const AdminForm = () => {
-	const [tx, setTx] = useState({
+const AdminForm = ({ email }: { email: string }) => {
+	const [user, setUser] = useState<{
+		balance: number
+		interest: number
+		plan: "BASIC" | "STANDARD" | "PREMIUM" | "EXCLUSIVE"
+	}>({
 		balance: 100,
 		interest: 100,
-		plan: "Default",
+		plan: "BASIC",
 	})
+	const dispatch = useDispatch()
+	const status = useSelector(selectUserStatus)
+	const close = useSelector(selectUserClose)
+	const [open, setOpen] = useState(false)
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
+		try {
+			dispatch(updateUser({ email, ...user }))
+		} catch (error) {
+			console.log(error)
+		}
 	}
+	useEffect(() => {
+		if (status === "idle" && open && close) {
+			setOpen(false)
+		}
+	}, [status, open, close])
 
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button className="w-full md:w-max">
 					Update user&#39;s information
@@ -59,11 +80,11 @@ const AdminForm = () => {
 								type="number"
 								step={50}
 								onChange={(e) =>
-									setTx({ ...tx, balance: Number(e.currentTarget.value) })
+									setUser({ ...user, balance: Number(e.currentTarget.value) })
 								}
 								id="name"
 								min={0}
-								defaultValue={tx.balance}
+								defaultValue={user.balance}
 								className="col-span-3"
 							/>
 						</div>
@@ -76,21 +97,21 @@ const AdminForm = () => {
 								type="number"
 								step={50}
 								onChange={(e) =>
-									setTx({ ...tx, interest: Number(e.currentTarget.value) })
+									setUser({ ...user, interest: Number(e.currentTarget.value) })
 								}
 								id="name"
 								min={0}
-								defaultValue={tx.interest}
+								defaultValue={user.interest}
 								className="col-span-3"
 							/>
 						</div>
 						<div className="w-full">
 							<Select
-								onValueChange={(e: unknown) =>
-									setTx({ ...tx, plan: e as string })
-								}>
+								onValueChange={(
+									e: "BASIC" | "STANDARD" | "PREMIUM" | "EXCLUSIVE",
+								) => setUser({ ...user, plan: e })}>
 								<SelectTrigger className="w-full">
-									<SelectValue placeholder={tx.plan} />
+									<SelectValue placeholder={user.plan} />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
@@ -105,7 +126,13 @@ const AdminForm = () => {
 						</div>
 					</div>
 					<DialogFooter>
-						<Button type="submit">Save changes</Button>
+						<Button type="submit" className="w-4/12">
+							{status === "loading" ? (
+								<Loader2 className="animate-spin" />
+							) : (
+								"Save changes"
+							)}
+						</Button>
 					</DialogFooter>
 				</form>
 			</DialogContent>

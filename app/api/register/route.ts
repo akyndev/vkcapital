@@ -15,6 +15,7 @@ export async function POST(request: Request) {
 			name,
 			email,
 			password: hashPassword,
+			createdAt: new Date()
 		},
 	})
 

@@ -31,29 +31,31 @@ const AuthForm = ({
 	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
 
-
-
 	const onSumbit = (e: Auth) => {
 		setLoading(true)
-		if (!form) {
-			signIn("credentials", {
-				email: e.email,
-				password: e.password,
-			})
-			setLoading(false)
-		} else {
-			fetch("/api/register", {
-				method: "POST",
-				body: JSON.stringify(e),
-			})
-				.then((res) => res.json())
-				.then(() => {
-					signIn("credentials", {
-						email: e.email,
-						password: e.password,
-					}),
-						setLoading(false)
+		try {
+			if (!form) {
+				signIn("credentials", {
+					email: e.email,
+					password: e.password,
 				})
+				setLoading(false)
+			} else {
+				fetch("/api/register", {
+					method: "POST",
+					body: JSON.stringify(e),
+				})
+					.then((res) => res.json())
+					.then(() => {
+						signIn("credentials", {
+							email: e.email,
+							password: e.password,
+						}),
+							setLoading(false)
+					})
+			}
+		} catch (error) {
+			console.log(error)
 		}
 	}
 

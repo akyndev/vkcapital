@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import {
 	Dialog,
@@ -21,23 +21,40 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select"
+import { useDispatch, useSelector } from "@/lib/redux"
+import { createTx } from "@/lib/redux/slices/thunks"
+import { selectTxClose, selectTxStatus } from "@/lib/redux/slices/selectors"
+import { Loader2 } from "lucide-react"
 
-const TxForm = () => {
-	const [tx, setTx] = useState({
+const TxForm = ({ userId }: { userId: string }) => {
+	const [tx, setTx] = useState<{ type: "TOPUP" | "WITHDRAW"; amount: number }>({
 		amount: 100,
-		type: "Default",
+		type: "TOPUP",
 	})
 
+	const [open, setOpen] = useState(false)
+
+	const status = useSelector(selectTxStatus)
+	const close = useSelector(selectTxClose)
+	const dispatch = useDispatch()
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-
-
-
+		try {
+			dispatch(createTx({ ...tx, userId, id: userId }))
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
+	useEffect(() => {
+		if (status === "idle" && open && close) {
+			setOpen(false)
+		}
+	}, [status, open, close])
+
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button className="w-full md:w-max">Add a transaction</Button>
 			</DialogTrigger>
@@ -69,8 +86,8 @@ const TxForm = () => {
 						</div>
 						<div className="w-full">
 							<Select
-								onValueChange={(e: unknown) =>
-									setTx({ ...tx, type: e as string })
+								onValueChange={(e: "TOPUP" | "WITHDRAW") =>
+									setTx({ ...tx, type: e })
 								}>
 								<SelectTrigger className="w-full">
 									<SelectValue placeholder="Type of transaction" />
@@ -86,7 +103,9 @@ const TxForm = () => {
 						</div>
 					</div>
 					<DialogFooter>
-						<Button type="submit">Save changes</Button>
+						<Button type="submit" className="w-4/12">
+							{status === "loading" ? <Loader2 className="animate-spin" /> : "Save changes"}
+						</Button>
 					</DialogFooter>
 				</form>
 			</DialogContent>

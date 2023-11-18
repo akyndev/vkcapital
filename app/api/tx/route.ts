@@ -2,15 +2,22 @@ import { prisma } from "@/lib/authOptions"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
-	const { name, email, password } = await request.json()
+	const { amount, userId, type } = await request.json()
 
-	const tx = await prisma.transaction.create({
+	await prisma.transaction.create({
 		data: {
-			userId: "655753262627f9401ba2693d",
-			type: "TOPUP",
-			amount: 9000,
+			userId,
+			type,
+			amount,
+			createdAt: new Date(),
 		},
 	})
 
-	return NextResponse.json({ ...tx }, { status: 201 })
+	const txs = await prisma.transaction.findMany({
+		where: {
+			userId,
+		},
+	})
+
+	return NextResponse.json({ data: txs }, { status: 201 })
 }

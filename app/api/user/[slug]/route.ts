@@ -5,20 +5,24 @@ export async function POST(
 	request: Request,
 	{ params }: { params: { slug: string } },
 ) {
-
 	const { balance, interest, plan } = await request.json()
-    const email = params.slug 
-    
-	const updated = await prisma.user.update({
-		where: {
-			email,
-		},
-		data: {
-			balance,
-			interest,
-			plan,
-		},
-	})
+	const email = params.slug
 
-	return NextResponse.json({ ...updated }, { status: 201 })
+	try {
+		const updated = await prisma.user.update({
+			where: {
+				email,
+			},
+			data: {
+				balance,
+				interest,
+				plan,
+			},
+		})
+
+		return NextResponse.json({ ...updated }, { status: 201 })
+	} catch (error) {
+		console.log(error)
+		return NextResponse.json({ error }, { status: 201 })
+	}
 }
