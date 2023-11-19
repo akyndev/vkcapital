@@ -2,6 +2,8 @@ import { prisma } from "@/lib/authOptions"
 import { NextRequest, NextResponse } from "next/server"
 import { revalidatePath } from "next/cache"
 
+export const revalidate = true
+
 export async function GET(request: NextRequest) {
 	const path = "/admin/users"
 	console.log(path)
