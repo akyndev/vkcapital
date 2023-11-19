@@ -23,6 +23,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 	if (status === "loading") {
 		return (
 			<>
+				<Aside />
 				<Header />
 				<div className="container lg:px-8">
 					<div className="w-full h-[80vh] flex-col bg-white rounded-lg flex items-center justify-center text-xl font-extrabold mt-4">
@@ -45,7 +46,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 				</>
 			) : (
 				<>
+					<Aside />
 					<Header />
+
 					<div className="container lg:px-8">
 						<div className="w-full h-[80vh] flex-col bg-white rounded-lg flex items-center justify-center text-xl font-extrabold mt-4">
 							<p className="mb-3">Only admin can access this page</p>

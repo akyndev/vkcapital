@@ -131,7 +131,7 @@ const Dashboard = ({ data }: { data: User }) => {
 				<div className="grid md:grid-cols-2 grid-cols-1 gap-6">
 					<div className="bg-white rounded-lg p-6">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+							<h3 className="font-extrabold text-lg md:text-xl">
 								Latest transactions
 							</h3>
 							<Link href={"/transactions"}>
@@ -180,7 +180,7 @@ const Dashboard = ({ data }: { data: User }) => {
 										))}
 									</div>
 								) : (
-									<p className="w-full h-full flex items-center justify-center text-xl">
+									<p className="w-full h-full pb-2 flex items-center justify-center text-xl">
 										No recent transaction
 									</p>
 								)}
@@ -189,7 +189,7 @@ const Dashboard = ({ data }: { data: User }) => {
 					</div>
 					<div className="bg-white rounded-lg p-6 lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+							<h3 className="font-extrabold text-lg md:text-xl">
 								Deposit Calculator
 							</h3>
 							<MoreHorizontal />

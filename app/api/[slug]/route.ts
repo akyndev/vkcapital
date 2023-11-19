@@ -16,6 +16,10 @@ export async function GET(
 			},
 		})
 
+		if (!user) {
+			return NextResponse.json({ message: "no user found" }, { status: 400 })
+		}
+
 		return NextResponse.json({ ...user }, { status: 200 })
 	} catch (error) {
 		console.log(error)

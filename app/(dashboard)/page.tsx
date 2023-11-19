@@ -34,18 +34,7 @@ export default function Home() {
 		)
 	}
 
-	if (!parsedUser.success) {
-		return (
-			<main className="relative container lg:px-8">
-				<p>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa, ab!
-					Distinctio deserunt commodi veritatis. Fuga, repudiandae illo! In
-					explicabo quos tempore sed est eos nesciunt repellendus consequuntur
-					corrupti, nemo atque?
-				</p>
-			</main>
-		)
-	}
+	if (!parsedUser.success) throw new Error("Failed to Pass")
 
 	return (
 		<main className="relative container lg:px-8">
