@@ -1,6 +1,11 @@
 "use client"
-import { updateAllUsersState, useDispatch, useSelector } from "@/lib/redux"
-import { selectAllUsers } from "@/lib/redux/slices/selectors"
+import {
+	getAllUsers,
+	updateAllUsersState,
+	useDispatch,
+	useSelector,
+} from "@/lib/redux"
+import { selectAllUsers, selectUserStatus } from "@/lib/redux/slices/selectors"
 import { User } from "@/lib/types"
 import { formattedValue } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
@@ -16,12 +21,6 @@ export const revalidate = 0
 export const fetchCache = "force-no-store"
 
 const allUser = ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-const fetcher = (...rest: any) =>
-	fetch(rest, {
-		method: "GET",
-		cache: "no-store",
-		next: { revalidate: 0 },
-	}).then((res) => res.json())
 
 const Table = () => {
 	const router = useRouter()
@@ -29,24 +28,18 @@ const Table = () => {
 	const [open, setOpen] = useState(false)
 	const [email, setEmail] = useState("")
 	const users = useSelector(selectAllUsers)
-	const { data, isLoading, error } = useSWR<{ data: User[] }>(
-		"/api/users",
-		fetcher,
-	)
+	const status = useSelector(selectUserStatus)
 
 	useEffect(() => {
-		console.log(data?.data, "qwerty")
-		if (!isLoading && data && data.data) {
-			dispatch(updateAllUsersState([...data.data]))
-		}
-	}, [isLoading, dispatch, data])
+		dispatch(getAllUsers())
+	}, [dispatch])
 
 	const handleDelete = async (e: string) => {
 		setEmail(e)
 		setOpen(!open)
 	}
 
-	if (isLoading) {
+	if (status === "loading") {
 		return (
 			<div className="flex-1 py-8 space-y-6 bg-white p-8 mt-8 capitalize rounded-lg">
 				<table className="w-full">

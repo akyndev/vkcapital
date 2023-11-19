@@ -30,11 +30,11 @@ const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 		try {
 			await axios.delete(`/api/delete/${email}`)
 			setDeleting(false)
+			dispatch(getAllUsers())
             toast({
                 variant: "success",
 				description: "User successfully deleted",
 			})
-			dispatch(getAllUsers())
 		} catch (error) {
 			console.log(error)
 			toast({

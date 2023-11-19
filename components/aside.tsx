@@ -95,7 +95,7 @@ const Aside = () => {
 							</Link>
 						</li>
 
-						{status !== "loading" && data ? (
+						{data ? (
 							<>
 								{adminArr.includes(data.user?.email as string) ? (
 									<li
