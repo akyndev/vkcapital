@@ -1,7 +1,9 @@
 import { z } from "zod"
-import { authSchema, txSchema, userSchema } from "../prisma/schema"
+import { authSchema, loginSchema, txSchema, userSchema } from "../prisma/schema"
 
 export type Auth = z.infer<typeof authSchema>
+
+export type Login = z.infer<typeof loginSchema>
 
 export type User = z.infer<typeof userSchema>
 

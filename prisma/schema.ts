@@ -6,6 +6,11 @@ export const authSchema = z.object({
 	password: z.string().min(10, "Password must not be less than 10 characters"),
 })
 
+export const loginSchema = z.object({
+	email: z.string().email(),
+	password: z.string().min(10, "Password must not be less than 10 characters"),
+})
+
 const PlanEnum = z.enum(["BASIC", "STANDARD", "PREMIUM", "EXCLUSIVE"])
 const TransactionTypesEnum = z.enum(["TOPUP", "WITHDRAW"])
 

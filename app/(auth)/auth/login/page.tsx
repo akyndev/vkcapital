@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Auth } from "@/lib/types"
-import { authSchema } from "@/prisma/schema"
+import { Login as Auth } from "@/lib/types"
+import { authSchema, loginSchema } from "@/prisma/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
@@ -18,7 +18,7 @@ const Login = () => {
 		register,
 		formState: { errors },
 		reset,
-	} = useForm<Auth>({ resolver: zodResolver(authSchema) })
+	} = useForm<Auth>({ resolver: zodResolver(loginSchema) })
 
 	const { data, status } = useSession()
 	const router = useRouter()
@@ -63,6 +63,7 @@ const Login = () => {
 							{err}
 						</p>
 					) : null}
+
 					<div className="flex flex-col items-start justify-start">
 						<Label htmlFor="email" className="ml-2 font-semibold text-sm mb-1">
 							Email
@@ -79,6 +80,7 @@ const Login = () => {
 							</p>
 						)}
 					</div>
+
 					<div className="flex flex-col items-start justify-start">
 						<Label
 							htmlFor="password"
@@ -104,7 +106,7 @@ const Login = () => {
 						)}
 					</div>
 
-					<Button disabled={status === "loading" || loading} type="submit" className="w-full">
+					<Button disabled={status === "loading" || loading} className="w-full">
 						<span>{loading ? "Signing in..." : "Sign in"}</span>
 					</Button>
 
