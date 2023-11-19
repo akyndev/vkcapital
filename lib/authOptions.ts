@@ -28,7 +28,7 @@ const authOptions: NextAuthOptions = {
 
 				if (!user) throw new Error("user not found")
 
-				if (!user.password) return null
+				if (!user.password) throw new Error("No password for this account")
 
 				const p = await bcrypt.compare(credentials.password, user.password)
 
