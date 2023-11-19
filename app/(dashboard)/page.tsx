@@ -21,11 +21,10 @@ export default function Home() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (!isLoading) {
-			dispatch(updateTxState([...(data?.transactions as Array<Transaction>)]))
+		if (!isLoading && data && data.transactions) {
+			dispatch(updateTxState([...data.transactions]))
 		}
 	}, [isLoading, dispatch, data])
-
 
 	if (isLoading) {
 		return (

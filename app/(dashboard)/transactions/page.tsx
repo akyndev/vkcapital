@@ -23,10 +23,10 @@ const Transactions = () => {
 	)
 	const parsedUser = userSchema.safeParse(data)
 	const dispatch = useDispatch()
-const open = useSelector(selectTxOpenNav)
+	const open = useSelector(selectTxOpenNav)
 	useEffect(() => {
-		if (!isLoading) {
-			dispatch(updateTxState([...(data?.transactions as Array<Transaction>)]))
+		if (!isLoading && data && data.transactions) {
+			dispatch(updateTxState([...data.transactions]))
 		}
 	}, [isLoading, dispatch, data])
 
