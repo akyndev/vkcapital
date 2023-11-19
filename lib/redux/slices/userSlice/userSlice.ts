@@ -31,9 +31,6 @@ export const userSlice = createSlice({
 		updateUserState: (state, action) => {
 			state.value = action.payload
 		},
-		updateAllUsersState: (state, action) => {
-			state.users = action.payload
-		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -62,7 +59,7 @@ export const userSlice = createSlice({
 	},
 })
 
-export const { updateUserState, updateAllUsersState } = userSlice.actions
+export const { updateUserState } = userSlice.actions
 
 /* Types */
 export interface UserSliceState {

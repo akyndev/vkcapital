@@ -1,18 +1,15 @@
 "use client"
 import {
 	getAllUsers,
-	updateAllUsersState,
 	useDispatch,
-	useSelector,
+	useSelector
 } from "@/lib/redux"
 import { selectAllUsers, selectUserStatus } from "@/lib/redux/slices/selectors"
-import { User } from "@/lib/types"
 import { formattedValue } from "@/lib/utils"
 import { Trash2 } from "lucide-react"
 import moment from "moment"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import useSWR from "swr"
 import DeleteDialog from "./confirm-delete"
 import { Skeleton } from "./ui/skeleton"
 
@@ -32,7 +29,8 @@ const Table = () => {
 
 	useEffect(() => {
 		dispatch(getAllUsers())
-	}, [dispatch])
+		router.refresh()
+	}, [dispatch, router])
 
 	const handleDelete = async (e: string) => {
 		setEmail(e)
