@@ -41,7 +41,7 @@ export default function Home() {
 			<div className="container lg:px-8">
 				<div className="w-full h-[80vh] flex-col bg-white rounded-lg flex items-center justify-center text-xl font-extrabold mt-4">
 					<p className="mb-3">Login in to see the dashboard</p>
-					<Link href={"/"}>
+					<Link href={"/auth/login"}>
 						<Button>Go back Login</Button>
 					</Link>
 				</div>
