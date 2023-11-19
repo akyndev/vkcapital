@@ -16,7 +16,7 @@ const adminArr = [
 	"kuzzogrind@gmail.com",
 	"rytglobal@gmail.com",
 	"elprimeroinvestments@gmail.com",
-	"akinladejoseph3880@gmail.com",
+	"akinladejose88ph30@gmail.com",
 ]
 
 const Aside = () => {

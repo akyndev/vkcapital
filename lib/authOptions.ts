@@ -16,9 +16,7 @@ const authOptions: NextAuthOptions = {
 				password: { label: "Password" },
 			},
 			async authorize(credentials, req) {
-				if (!credentials || !credentials.email || !credentials.password) {
-					return null
-				}
+				if (!credentials || !credentials.email || !credentials.password) throw new Error("Please provide credentials")
 
 				const user = await prisma.user.findUnique({
 					where: {

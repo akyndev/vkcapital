@@ -41,7 +41,6 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 				<>
 					<Aside />
 					<Header />
-
 					{children}
 				</>
 			) : (
