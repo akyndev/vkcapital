@@ -8,6 +8,8 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Separator } from "./ui/separator"
+import { useSelector } from "@/lib/redux"
+import { selectTxOpenNav } from "@/lib/redux/slices/selectors"
 
 const Dashboard = ({ data }: { data: User }) => {
 	const [amount, setAmount] = useState(1000)
@@ -17,7 +19,7 @@ const Dashboard = ({ data }: { data: User }) => {
 		monthly: 0.0,
 		yearly: 0.0,
 	})
-
+	const open = useSelector(selectTxOpenNav)
 	const cal = useCallback(() => {
 		if (amount <= 999) {
 			setInterest({
@@ -47,9 +49,11 @@ const Dashboard = ({ data }: { data: User }) => {
 
 	return (
 		<div className="w-full h-screen flex items-start space-x-0">
-			<div className="sm:w-32 lg:w-64 h-screen lg:block" />
+			<div
+				className={cn("sm:w-24 lg:w-64 h-screen lg:block", { "sm:w-52": open })}
+			/>
 			<div className="flex-1 py-8 space-y-6">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<div className="grid md:grid-cols-2 grid-cols-1 gap-6">
 					<div className="bg-white rounded-lg space-y- p-6">
 						<h2 className="text-xl font-extrabold mb-3">Total Balance</h2>
 						<h2 className="text-xl font-extrabold">
@@ -124,7 +128,7 @@ const Dashboard = ({ data }: { data: User }) => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<div className="grid md:grid-cols-2 grid-cols-1 gap-6">
 					<div className="bg-white rounded-lg p-6">
 						<div className="flex items-center justify-between mb-3">
 							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
@@ -143,7 +147,9 @@ const Dashboard = ({ data }: { data: User }) => {
 								{data.transactions.length > 0 ? (
 									<div className="">
 										{data.transactions.slice(0, 6).map((d, i) => (
-											<div key={i} className="flex items-start flex-wrap gap-4 border-b border-muted first:border-t py-2">
+											<div
+												key={i}
+												className="flex items-start flex-wrap gap-4 border-b border-muted first:border-t py-2">
 												{d.type === "TOPUP" ? (
 													<div className="flex w-max p-3 text-sm items-center justify-center text-[#369A40] rounded-full space-x-2 bg-green-400/20">
 														<ArrowUp size={16} className="" />

@@ -11,11 +11,12 @@ import {
 } from "@/lib/redux"
 import { selectTx, selectUser } from "@/lib/redux/slices/selectors"
 import { Transaction, User } from "@/lib/types"
-import { formattedValue } from "@/lib/utils"
+import { cn, formattedValue } from "@/lib/utils"
 import { userSchema } from "@/prisma/schema"
 import dynamic from "next/dynamic"
 import React, { useEffect, useState } from "react"
 import useSwr from "swr"
+import { selectTxOpenNav } from "@/lib/redux/slices/selectors"
 
 const TxTable = dynamic(() => import("../../../../../components/tx-table"), {
 	ssr: false,
@@ -33,7 +34,7 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 	const user = useSelector(selectUser)
 	const dispatch = useDispatch()
 	// const parsedUser = userSchema.safeParse(data)
-
+const open = useSelector(selectTxOpenNav)
 	useEffect(() => {
 		if (!isLoading) {
 			dispatch(updateTxState([...data?.transactions as Array<Transaction>]))
@@ -44,7 +45,11 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 	return (
 		<main className="relative container lg:px-8">
 			<div className="w-full h-screen flex items-start space-x-0">
-				<div className="sm:w-32 lg:w-64 h-screen lg:block" />
+				<div
+					className={cn("sm:w-24 lg:w-64 h-screen lg:block", {
+						"sm:w-52": open,
+					})}
+				/>
 				<div className="flex-1 py-8 space-y-6">
 					<div className="p-6 bg-white rounded-lg">
 						<div className="flex flex-wrap gap-y-4 gap-x-6">

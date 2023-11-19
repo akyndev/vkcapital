@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const authSchema = z.object({
-	name: z.string().optional(),
+	name: z.string().min(3, "Name can't be two characters"),
 	email: z.string().email(),
 	password: z.string().min(10, "Password must not be less than 10 characters"),
 })

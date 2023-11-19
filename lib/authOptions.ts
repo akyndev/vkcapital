@@ -26,13 +26,13 @@ const authOptions: NextAuthOptions = {
 					},
 				})
 
-				if (!user) return null
+				if (!user) throw new Error("user not found")
 
 				if (!user.password) return null
 
-				const p = bcrypt.compare(credentials.password, user.password)
+				const p = await bcrypt.compare(credentials.password, user.password)
 
-				if (!p) return null
+				if (!p) throw new Error("password is not valid")
 
 				return {
 					id: user?.id,
@@ -43,7 +43,8 @@ const authOptions: NextAuthOptions = {
 		}),
 	],
 	pages: {
-		signIn: "/auth",
+		signIn: "/auth/login",
+		error: "/auth/login",
 	},
 	session: {
 		strategy: "jwt",

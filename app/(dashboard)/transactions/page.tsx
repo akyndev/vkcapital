@@ -4,10 +4,12 @@ import TxLoader from "@/components/txLoader"
 import { updateTxState, useDispatch, useSelector } from "@/lib/redux"
 import { selectTx } from "@/lib/redux/slices/selectors"
 import { Transaction, User } from "@/lib/types"
+import { cn } from "@/lib/utils"
 import { userSchema } from "@/prisma/schema"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import useSwr from "swr"
+import { selectTxOpenNav } from "@/lib/redux/slices/selectors"
 
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET" }).then((res) => res.json())
@@ -21,7 +23,7 @@ const Transactions = () => {
 	)
 	const parsedUser = userSchema.safeParse(data)
 	const dispatch = useDispatch()
-
+const open = useSelector(selectTxOpenNav)
 	useEffect(() => {
 		if (!isLoading) {
 			dispatch(updateTxState([...(data?.transactions as Array<Transaction>)]))
@@ -31,7 +33,11 @@ const Transactions = () => {
 	return (
 		<div>
 			<div className="w-full h-screen flex items-start space-x-0">
-				<div className="sm:w-32 lg:w-64 h-screen lg:block"></div>
+				<div
+					className={cn("sm:w-24 lg:w-64 h-screen lg:block", {
+						"sm:w-52": open,
+					})}
+				/>
 				<div className="flex-1 py-8 space-y-6 px-6">
 					<div className="rounded-lg bg-white p-6">
 						{isLoading ? (

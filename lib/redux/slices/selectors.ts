@@ -9,4 +9,5 @@ export const selectUser = (state: ReduxState) => state.user.value
 export const selectUserStatus = (state: ReduxState) => state.user.status
 export const selectTxStatus = (state: ReduxState) => state.tx.status
 export const selectTxClose = (state: ReduxState) => state.tx.close
+export const selectTxOpenNav = (state: ReduxState) => state.tx.openNav
 export const selectUserClose = (state: ReduxState) => state.user.close

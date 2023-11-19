@@ -40,7 +40,7 @@ async function AdminDashboard() {
 	return (
 		<main className="relative container lg:px-8">
 			<div className="w-full h-screen flex items-start space-x-0">
-				<div className="sm:w-32 lg:w-64 h-screen lg:block" />
+				<div className="sm:w-24 lg:w-64 h-screen lg:block" />
 				<Table allUser={pUsers.data} />
 			</div>
 		</main>

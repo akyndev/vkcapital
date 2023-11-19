@@ -1,12 +1,20 @@
+"use client"
 import { Loader, Loader2, MoreHorizontal } from "lucide-react"
 import React from "react"
 import { Button } from "./ui/button"
 import { Skeleton } from "./ui/skeleton"
+import { cn } from "@/lib/utils"
+import { useSelector } from "@/lib/redux"
+import { selectTxOpenNav } from "@/lib/redux/slices/selectors"
 
 const DashboardLoader = () => {
+	const open = useSelector(selectTxOpenNav)
+
 	return (
 		<div className="w-full h-screen flex items-start space-x-0">
-			<div className="sm:w-32 lg:w-64 h-screen lg:block" />
+			<div
+				className={cn("sm:w-24 lg:w-64 h-screen lg:block", { "sm:w-52": open })}
+			/>
 			<div className="flex-1 py-8 space-y-6">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					<div className="bg-white rounded-lg space-y- p-6">

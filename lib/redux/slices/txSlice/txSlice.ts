@@ -38,7 +38,7 @@ export const txSlice = createSlice({
 	},
 })
 
-export const { updateTxState } = txSlice.actions
+export const { updateTxState, openNav } = txSlice.actions
 
 /* Types */
 export interface TxSliceState {
