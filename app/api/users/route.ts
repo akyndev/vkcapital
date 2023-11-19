@@ -1,7 +1,11 @@
 import { prisma } from "@/lib/authOptions"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
+import { revalidatePath } from "next/cache"
 
-export async function GET(req: Request) {
+export async function GET(request: NextRequest) {
+	const path = "/admin/users"
+	console.log(path)
+	revalidatePath(path)
 	try {
 		const users = await prisma.user.findMany({})
 		if (!users)
