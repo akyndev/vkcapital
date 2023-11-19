@@ -11,9 +11,7 @@ import { useEffect } from "react"
 import useSWR from "swr"
 
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET", next: { revalidate: 0 } }).then((res) =>
-		res.json(),
-	)
+	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())
 
 const Transactions = () => {
 	const tx = useSelector(selectTx)
