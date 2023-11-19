@@ -9,6 +9,7 @@ import { userSchema } from "@/prisma/schema"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import useSWR from "swr"
+export const dynamic = "force-dynamic"
 
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())

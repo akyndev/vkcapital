@@ -16,7 +16,7 @@ const adminArr = [
 	"kuzzogrind@gmail.com",
 	"rytglobal@gmail.com",
 	"elprimeroinvestments@gmail.com",
-	"akinladejose88ph30@gmail.com",
+	"akinladejoseph3880@gmail.com",
 ]
 
 const Aside = () => {
@@ -95,7 +95,7 @@ const Aside = () => {
 							</Link>
 						</li>
 
-						{data ? (
+						{status !== "loading" && data ? (
 							<>
 								{adminArr.includes(data.user?.email as string) ? (
 									<li

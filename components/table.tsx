@@ -11,6 +11,9 @@ import useSWR from "swr"
 import DeleteDialog from "./confirm-delete"
 import { Skeleton } from "./ui/skeleton"
 
+export const dynamic = "force-dynamic"
+
+
 const allUser = ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())

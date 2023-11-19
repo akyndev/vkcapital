@@ -16,14 +16,15 @@ import {
 } from "@/lib/redux/slices/selectors"
 import { User } from "@/lib/types"
 import { cn, formattedValue } from "@/lib/utils"
-import dynamic from "next/dynamic"
+import * as d from "next/dynamic"
 import { notFound } from "next/navigation"
 import { useEffect } from "react"
 import useSWR from "swr"
 
-const TxTable = dynamic(() => import("../../../../../components/tx-table"), {
+const TxTable = d.default(() => import("../../../../../components/tx-table"), {
 	ssr: false,
 })
+export const dynamic = "force-dynamic"
 
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())
