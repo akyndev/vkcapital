@@ -9,7 +9,11 @@ import {
 	useDispatch,
 	useSelector,
 } from "@/lib/redux"
-import { selectTx, selectTxOpenNav, selectUser } from "@/lib/redux/slices/selectors"
+import {
+	selectTx,
+	selectTxOpenNav,
+	selectUser,
+} from "@/lib/redux/slices/selectors"
 import { User } from "@/lib/types"
 import { cn, formattedValue } from "@/lib/utils"
 import dynamic from "next/dynamic"
@@ -45,7 +49,7 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 			dispatch(updateUserState({ ...data }))
 		}
 	}, [isLoading, dispatch, data])
-	
+
 	return (
 		<main className="relative container lg:px-8">
 			<div className="w-full h-screen flex items-start space-x-0">
@@ -93,7 +97,11 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 							</div>
 						</div>
 						<div className="mt-3">
-							<AdminForm email={params.slug} />
+							<AdminForm
+								uBalance={data?.balance as number}
+								uInterest={data?.interest as number}
+								email={params.slug}
+							/>
 						</div>
 					</div>
 					<div className="bg-white p-6 mt-8 capitalize rounded-lg">

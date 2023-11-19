@@ -1,6 +1,6 @@
 /* Core */
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { updateUser } from "../thunks"
+import { getAllUsers, updateUser } from "../thunks"
 import { User } from "@/lib/types"
 import { txSlice } from ".."
 
@@ -19,6 +19,7 @@ const initialState: UserSliceState = {
 		createdAt: new Date(),
 		updatedAt: new Date(),
 	},
+	users: [],
 	status: "idle",
 	close: false,
 }
@@ -29,6 +30,9 @@ export const userSlice = createSlice({
 	reducers: {
 		updateUserState: (state, action) => {
 			state.value = action.payload
+		},
+		updateAllUsersState: (state, action) => {
+			state.users = action.payload
 		},
 	},
 	extraReducers: (builder) => {
@@ -45,14 +49,25 @@ export const userSlice = createSlice({
 			.addCase(updateUser.rejected, (state) => {
 				state.status = "failed"
 			})
+			.addCase(getAllUsers.pending, (state) => {
+				state.status = "loading"
+			})
+			.addCase(getAllUsers.fulfilled, (state, action) => {
+				state.status = "idle"
+				state.users = action.payload
+			})
+			.addCase(getAllUsers.rejected, (state) => {
+				state.status = "failed"
+			})
 	},
 })
 
-export const { updateUserState } = userSlice.actions
+export const { updateUserState, updateAllUsersState } = userSlice.actions
 
 /* Types */
 export interface UserSliceState {
 	close: boolean
 	value: User
+	users: User[]
 	status: "idle" | "loading" | "failed"
 }

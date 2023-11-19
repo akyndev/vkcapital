@@ -14,7 +14,7 @@ type U = {
 export const updateUser = createAppAsyncThunk(
 	"app/updateUser",
 	async ({ email, ...data }: U) => {
-		const res = await axios.post(`/api/user/${email}`, data)
+		const res = await axios.patch(`/api/users/${email}`, data)
 		return res.data
 	},
 )
@@ -22,4 +22,10 @@ export const updateUser = createAppAsyncThunk(
 export const createTx = createAppAsyncThunk("app/createTx", async (data: Tx) => {
 	const res = await axios.post(`/api/tx`, data)
 	return res.data
+})
+
+
+export const getAllUsers = createAppAsyncThunk("app/users", async () => {
+	const res = await axios.get("/api/users")
+	return res.data.data
 })

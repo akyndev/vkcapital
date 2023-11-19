@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/authOptions"
 import { NextResponse } from "next/server"
 
-export async function POST(
+export async function PATCH(
 	request: Request,
 	{ params }: { params: { slug: string } },
 ) {

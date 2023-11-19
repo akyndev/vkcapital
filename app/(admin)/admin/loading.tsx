@@ -7,7 +7,7 @@ const Laoding = () => {
   return (
 		<main className="relative container lg:px-8">
 			<div className="w-full h-screen flex items-start space-x-0">
-				<div className="sm:w-32 lg:w-64 h-screen lg:block" />
+				<div className="sm:w-24 lg:w-64 h-screen lg:block" />
 				<div className="flex-1 py-8 space-y-6 bg-white p-8 mt-8 capitalize rounded-lg">
 					<table className="w-full">
 						<tr className="border-b border-gray-200 pb-3">

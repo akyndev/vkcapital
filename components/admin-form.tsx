@@ -25,14 +25,14 @@ import {
 	SelectValue,
 } from "./ui/select"
 
-const AdminForm = ({ email }: { email: string }) => {
+const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: number, uInterest: number }) => {
 	const [user, setUser] = useState<{
 		balance: number
 		interest: number
 		plan: "BASIC" | "STANDARD" | "PREMIUM" | "EXCLUSIVE"
 	}>({
-		balance: 100,
-		interest: 100,
+		balance: uBalance,
+		interest: uInterest,
 		plan: "BASIC",
 	})
 	const dispatch = useDispatch()

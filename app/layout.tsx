@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { Mulish } from "next/font/google"
 import { cn } from "@/lib/utils"
 import ReduxProvider from "@/provider/redux"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Mulish({ subsets: ["latin"] })
 
@@ -22,7 +23,10 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body className={cn("bg-gray-100", inter.className)}>
 				<ReduxProvider>
-					<Session>{children}</Session>
+					<Session>
+						{children}
+						<Toaster />
+					</Session>
 				</ReduxProvider>
 			</body>
 		</html>

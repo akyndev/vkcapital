@@ -63,10 +63,10 @@ const Dashboard = ({ data }: { data: User }) => {
 							last interest
 						</p>
 						<div className="mt-3  flex flex-wrap gap-3">
-							<Link target="_blank" href={"https://telegram.me/VKFinanceSA"}>
+							<Link target="_blank" href={"https://telegram.me/VKFinanceTeam"}>
 								<Button className="rounded-full w-32">Top up</Button>
 							</Link>
-							<Link target="_blank" href={"https://telegram.me/VKFinanceSA"}>
+							<Link target="_blank" href={"https://telegram.me/VKFinanceTeam"}>
 								<Button
 									className="rounded-full w-32 text-[#C5AA17]"
 									variant={"outline"}>
@@ -206,8 +206,7 @@ const Dashboard = ({ data }: { data: User }) => {
 									setAmount(Number(e.target.value))
 								}}
 								value={amount}
-								min={100}
-								step={50}
+								min={10}
 							/>
 							<div className="my-3 flex items-center gap-3 flex-wrap">
 								<Button onClick={() => setAmount(1000)} variant={"outline"}>
