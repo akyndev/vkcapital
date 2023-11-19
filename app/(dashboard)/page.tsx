@@ -9,10 +9,19 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { useEffect } from "react"
 import useSWR from "swr"
+
+
 export const dynamic = "force-dynamic"
 export const revalidate = 0
+export const fetchCache = "force-no-store"
+
+
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())
+	fetch(rest, {
+		method: "GET",
+		cache: "no-store",
+		next: { revalidate: 0 },
+	}).then((res) => res.json())
 
 export default function Home() {
 	const { data: session, status } = useSession({ required: true })
