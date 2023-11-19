@@ -78,7 +78,7 @@ const AdminForm = ({ email }: { email: string }) => {
 							</Label>
 							<Input
 								type="number"
-								step={50}
+								
 								onChange={(e) =>
 									setUser({ ...user, balance: Number(e.currentTarget.value) })
 								}
@@ -95,7 +95,7 @@ const AdminForm = ({ email }: { email: string }) => {
 							</Label>
 							<Input
 								type="number"
-								step={50}
+								
 								onChange={(e) =>
 									setUser({ ...user, interest: Number(e.currentTarget.value) })
 								}
