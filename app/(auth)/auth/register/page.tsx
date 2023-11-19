@@ -31,13 +31,12 @@ const Register = () => {
 		setLoading(true)
 		try {
 			const res = await axios.post("/api/register", { ...e })
-			console.log(res.data)
 			signIn("credentials", {
 				email: e.email,
 				password: e.password,
 			})
 		} catch (error: any) {
-			console.log(error.response.data)
+			console.log(error)
 			router.push(`/auth/register?error=${error.response.data.message}`)
 		}
 		setLoading(false)
