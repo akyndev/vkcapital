@@ -74,7 +74,6 @@ const TxForm = ({ userId }: { userId: string }) => {
 							</Label>
 							<Input
 								type="number"
-								step={50}
 								onChange={(e) =>
 									setTx({ ...tx, amount: Number(e.currentTarget.value) })
 								}
