@@ -28,8 +28,8 @@ const Table = () => {
 	const status = useSelector(selectUserStatus)
 
 	useEffect(() => {
-		dispatch(getAllUsers())
 		router.refresh()
+		dispatch(getAllUsers())
 	}, [dispatch, router])
 
 	const handleDelete = async (e: string) => {

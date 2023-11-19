@@ -1,8 +1,7 @@
 /* Core */
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { getAllUsers, updateUser } from "../thunks"
 import { User } from "@/lib/types"
-import { txSlice } from ".."
+import { createSlice } from "@reduxjs/toolkit"
+import { getAllUsers, updateUser } from "../thunks"
 
 const initialState: UserSliceState = {
 	value: {
