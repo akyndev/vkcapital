@@ -10,7 +10,7 @@ import { Eye, EyeOff } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 
 const Register = () => {
