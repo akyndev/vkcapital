@@ -25,7 +25,7 @@ const TxTable = d.default(() => import("../../../../../components/tx-table"), {
 	ssr: false,
 })
 export const dynamic = "force-dynamic"
-
+export const revalidate = 0
 const fetcher = (...rest: any) =>
 	fetch(rest, { method: "GET", cache: "no-store" }).then((res) => res.json())
 

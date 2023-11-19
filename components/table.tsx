@@ -12,7 +12,7 @@ import DeleteDialog from "./confirm-delete"
 import { Skeleton } from "./ui/skeleton"
 
 export const dynamic = "force-dynamic"
-
+export const revalidate = 0
 
 const allUser = ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 const fetcher = (...rest: any) =>
