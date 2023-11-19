@@ -9,9 +9,9 @@ const TxLoader = () => {
 			<thead>
 				<tr className="border-b border-gray-200 pb-3">
 					<th className="pl-2">Type</th>
-					<th className="pl-3">Status</th>
+					<th className="pl-3 hidden sm:block">Status</th>
 					<th>Amount</th>
-					<th>Date Created</th>
+					<th className="hidden xs:block">Date Created</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,13 +22,13 @@ const TxLoader = () => {
 						<td className="pl-2">
 							<Skeleton className="h-4" />
 						</td>
-						<td>
+						<td className="pl-3 hidden sm:block">
 							<Skeleton className="h-4" />
 						</td>
 						<td className="font-bold">
 							<Skeleton className="h-4" />
 						</td>
-						<td>
+						<td className="hidden xs:block">
 							<Skeleton className="h-4" />
 						</td>
 					</tr>

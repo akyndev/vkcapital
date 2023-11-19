@@ -32,7 +32,7 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 	const tx = useSelector(selectTx)
 	const user = useSelector(selectUser)
 	const dispatch = useDispatch()
-	const parsedUser = userSchema.safeParse(data)
+	// const parsedUser = userSchema.safeParse(data)
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -47,8 +47,8 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 				<div className="sm:w-32 lg:w-64 h-screen lg:block" />
 				<div className="flex-1 py-8 space-y-6">
 					<div className="p-6 bg-white rounded-lg">
-						<div className="grid grid-cols-3 gap-6 ">
-							<div className="border-gray-300 border rounded-lg p-6 w-full">
+						<div className="flex flex-wrap gap-y-4 gap-x-6">
+							<div className="border-gray-300 border rounded-lg p-6 flex-1">
 								<h4 className="text-muted-foreground text-sm font-medium">
 									Total Balance
 								</h4>
@@ -60,7 +60,7 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 									</h2>
 								)}
 							</div>
-							<div className="border-gray-300 border rounded-lg p-6 w-full">
+							<div className="border-gray-300 border rounded-lg p-6 flex-1">
 								<h4 className="text-muted-foreground text-sm font-medium">
 									Total Interest
 								</h4>
@@ -72,7 +72,7 @@ const UserPage = ({ params }: { params: { slug: string } }) => {
 									</h2>
 								)}
 							</div>
-							<div className="border-gray-300 border rounded-lg p-6 w-full">
+							<div className="border-gray-300 border rounded-lg p-6 flex-1">
 								<h4 className="text-muted-foreground text-sm font-medium">
 									Current Plan
 								</h4>

@@ -58,7 +58,7 @@ const Dashboard = ({ data }: { data: User }) => {
 						<p className="text-sm capitalize text-muted-foreground font-medium">
 							last interest
 						</p>
-						<div className="mt-3  space-x-2">
+						<div className="mt-3  flex flex-wrap gap-3">
 							<Link target="_blank" href={"https://telegram.me/VKFinanceSA"}>
 								<Button className="rounded-full w-32">Top up</Button>
 							</Link>
@@ -80,9 +80,9 @@ const Dashboard = ({ data }: { data: User }) => {
 					</div>
 					<div className="bg-white rounded-lg  p-6">
 						<h2 className="text-xl font-extrabold mb-3">Plan</h2>
-						<div className="mt-3  space-x-4 flex items-center">
+						<div className="mt-3 flex flex-wrap gap-y-1 gap-x-4 items-center">
 							<Button
-								className="rounded-full w-56"
+								className="rounded-full w-32 sm:w-44"
 								variant={
 									data.balance >= 1000 && data.balance <= 4999
 										? "default"
@@ -90,14 +90,14 @@ const Dashboard = ({ data }: { data: User }) => {
 								}>
 								Standard
 							</Button>
-							<h2 className="text-xl text-[#369A40] font-extrabold">
+							<h2 className="text-lg text-[#369A40] font-semibold">
 								+ {formattedValue(calIn(20))}{" "}
 								<small className="text-black font-normal">yearly</small>
 							</h2>
 						</div>
-						<div className="mt-3  space-x-4 flex items-center">
+						<div className="mt-3 flex flex-wrap gap-y-1 gap-x-4 items-center">
 							<Button
-								className="rounded-full w-56"
+								className="rounded-full w-32 sm:w-44"
 								variant={
 									data.balance >= 5000 && data.balance <= 9999
 										? "default"
@@ -105,18 +105,18 @@ const Dashboard = ({ data }: { data: User }) => {
 								}>
 								Premium
 							</Button>
-							<h2 className="text-xl text-[#369A40] font-extrabold">
+							<h2 className="text-lg text-[#369A40] font-semibold">
 								+ {formattedValue(calIn(30))}{" "}
 								<small className="text-black font-normal">yearly</small>
 							</h2>
 						</div>
-						<div className="mt-3  space-x-4 flex items-center">
+						<div className="mt-3 flex flex-wrap gap-y-1 gap-x-4 items-center">
 							<Button
-								className="rounded-full w-56"
+								className="rounded-full w-32 sm:w-44"
 								variant={data.balance >= 10000 ? "default" : "outline"}>
 								Exclusive
 							</Button>
-							<h2 className="text-xl text-[#369A40] font-extrabold">
+							<h2 className="text-lg text-[#369A40] font-semibold">
 								+ {formattedValue(calIn(40))}{" "}
 								<small className="text-black font-normal">yearly</small>
 							</h2>
@@ -127,15 +127,23 @@ const Dashboard = ({ data }: { data: User }) => {
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					<div className="bg-white rounded-lg p-6">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="font-extrabold text-xl">Latest transactions</h3>
-							<MoreHorizontal />
+							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+								Latest transactions
+							</h3>
+							<Link href={"/transactions"}>
+								<Button
+									variant={"ghost"}
+									className="text-primary px-2 py-1 font-semibold">
+									See More
+								</Button>
+							</Link>
 						</div>
 						{data.transactions ? (
 							<>
 								{data.transactions.length > 0 ? (
-									<div className="space-y-4">
-										{data.transactions.map((d, i) => (
-											<div key={i} className="flex items-start space-x-4">
+									<div className="">
+										{data.transactions.slice(0, 6).map((d, i) => (
+											<div key={i} className="flex items-start flex-wrap gap-4 border-b border-muted first:border-t py-2">
 												{d.type === "TOPUP" ? (
 													<div className="flex w-max p-3 text-sm items-center justify-center text-[#369A40] rounded-full space-x-2 bg-green-400/20">
 														<ArrowUp size={16} className="" />
@@ -146,7 +154,7 @@ const Dashboard = ({ data }: { data: User }) => {
 													</div>
 												)}
 												<div className="flex-1">
-													<h4 className="font-bold">
+													<h4 className="font-semibold">
 														{d.type === "TOPUP"
 															? "Balance Top up"
 															: "Withdrawal"}
@@ -175,7 +183,9 @@ const Dashboard = ({ data }: { data: User }) => {
 					</div>
 					<div className="bg-white rounded-lg p-6 lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="font-extrabold text-xl">Deposit Calculator</h3>
+							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+								Deposit Calculator
+							</h3>
 							<MoreHorizontal />
 						</div>
 						<div className="flex-1">
@@ -193,7 +203,7 @@ const Dashboard = ({ data }: { data: User }) => {
 								min={100}
 								step={50}
 							/>
-							<div className="my-3 space-x-3">
+							<div className="my-3 flex items-center gap-3 flex-wrap">
 								<Button onClick={() => setAmount(1000)} variant={"outline"}>
 									1000
 								</Button>
@@ -209,7 +219,7 @@ const Dashboard = ({ data }: { data: User }) => {
 									All
 								</Button>
 							</div>
-							<div className="my-3 space-x-3">
+							<div className="my-3 flex items-center gap-3 flex-wrap">
 								<Button
 									onClick={() => {
 										setPlan(20)
@@ -247,9 +257,10 @@ const Dashboard = ({ data }: { data: User }) => {
 							</p>
 							<Separator className="my-3" />
 							<p className="mb-2">
-								If you invest ${"0.000"} your estimated returns will be:{" "}
+								If you invest {formattedValue(amount)} your estimated returns
+								will be:{" "}
 							</p>
-							<div className="grid grid-cols-3">
+							<div className="flex flex-wrap gap-4 justify-between">
 								<div>
 									<p className="text-sm">Daily</p>
 									<h2 className="font-extrabold text-xl">

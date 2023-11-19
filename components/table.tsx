@@ -14,11 +14,11 @@ const Table = ({ allUser }: { allUser: User[] }) => {
 				<thead>
 					<tr className="border-b border-gray-200 pb-3">
 						<th className="pl-2">Name</th>
-						<th>Email</th>
+						<th className="hidden md:block">Email</th>
 						<th>Balance</th>
 						<th>Interest</th>
 						<th>Plan</th>
-						<th>Date Created</th>
+						<th className="hidden md:block">Date Created</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,11 +28,13 @@ const Table = ({ allUser }: { allUser: User[] }) => {
 							onClick={() => router.push(`/admin/users/${user.email}`)}
 							className="border-b font-medium text-sm border-gray-200 hover:bg-gray-100 transition-all duration-300 cursor-pointer">
 							<td className="pl-2">{user.name}</td>
-							<td className="lowercase">{user.email}</td>
+							<td className="lowercase hidden md:block">{user.email}</td>
 							<td className="font-bold">{formattedValue(user.balance)}</td>
 							<td className="text-[#37e237] font-bold">{user.interest}</td>
-							<td>{user.plan}</td>
-							<td>{moment(user.createdAt).format("ll")}</td>
+							<td className="text-xs font-bold">{user.plan}</td>
+							<td className="hidden md:block">
+								{moment(user.createdAt).format("ll")}
+							</td>
 						</tr>
 					))}
 				</tbody>

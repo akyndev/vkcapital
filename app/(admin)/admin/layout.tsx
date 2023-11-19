@@ -1,11 +1,62 @@
+"use client"
+import AdminHeader from "@/components/admin-header"
 import Aside from "@/components/aside"
-import React from "react"
+import Header from "@/components/header"
+import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
+import { useSession } from "next-auth/react"
+import Link from "next/link"
+import React, { useEffect } from "react"
+
+const adminArr = [
+	"rnrwakonda@gmail.com",
+	"kuzzogrind@gmail.com",
+	"rytglobal@gmail.com",
+	"elprimeroinvestments@gmail.com",
+	// "akinladejoseph3880@gmail.com",
+]
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
+	const { data, status } = useSession({ required: true })
+
+	useEffect(() => {}, [])
+
+	if (status === "loading") {
+		return (
+			<>
+				<AdminHeader />
+				<div className="container lg:px-8">
+					<div className="w-full h-[80vh] flex-col bg-white rounded-lg flex items-center justify-center text-xl font-extrabold mt-4">
+						<Loader2 className="animate-spin" />
+					</div>
+				</div>
+			</>
+		)
+	}
+
 	return (
 		<div>
-			<Aside />
-			{children}
+			{status === "authenticated" &&
+			adminArr.includes(data?.user?.email as string) ? (
+				<>
+					<Aside />
+					<AdminHeader />
+
+					{children}
+				</>
+			) : (
+				<>
+					<AdminHeader />
+					<div className="container lg:px-8">
+						<div className="w-full h-[80vh] flex-col bg-white rounded-lg flex items-center justify-center text-xl font-extrabold mt-4">
+							<p className="mb-3">Only admin can access this page</p>
+							<Link href={"/"}>
+								<Button>Go back Home</Button>
+							</Link>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	)
 }

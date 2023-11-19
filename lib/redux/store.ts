@@ -13,7 +13,7 @@ import { middleware } from "./middleware"
 export const reduxStore = configureStore({
 	reducer,
 	middleware: (getDefaultMiddleware) => {
-		return getDefaultMiddleware().concat(middleware)
+		return getDefaultMiddleware({ serializableCheck: false }).concat(middleware)
 	},
 })
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>()

@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require("tailwindcss/defaultTheme")
+
 module.exports = {
 	darkMode: ["class"],
 	content: [
@@ -14,6 +17,10 @@ module.exports = {
 			screens: {
 				"2xl": "1400px",
 			},
+		},
+		screens: {
+			"xs": "369px",
+			...defaultTheme.screens,
 		},
 		extend: {
 			colors: {

@@ -5,6 +5,7 @@ import { Transaction } from "@/lib/types"
 
 const initialState: TxSliceState = {
 	value: [],
+	openNav: false,
 	status: "idle",
 	close: false
 }
@@ -16,6 +17,9 @@ export const txSlice = createSlice({
 		updateTxState: (state, action) => {
 			state.value = action.payload
 		},
+		openNav: (state, ) => {
+			state.openNav = !state.openNav
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -38,7 +42,8 @@ export const { updateTxState } = txSlice.actions
 
 /* Types */
 export interface TxSliceState {
-	close: boolean,
+	close: boolean
+	openNav: boolean
 	value: Transaction[]
 	status: "idle" | "loading" | "failed"
 }

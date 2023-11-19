@@ -1,9 +1,11 @@
 "use client"
 import Dashboard from "@/components/dashboard"
 import DashboardLoader from "@/components/dashboard-loader"
-import { User } from "@/lib/types"
+import { updateTxState, useDispatch } from "@/lib/redux"
+import { Transaction, User } from "@/lib/types"
 import { userSchema } from "@/prisma/schema"
 import { useSession } from "next-auth/react"
+import { useEffect } from "react"
 import useSwr from "swr"
 
 const fetcher = (...rest: any) =>
@@ -16,6 +18,14 @@ export default function Home() {
 		fetcher,
 	)
 	const parsedUser = userSchema.safeParse(data)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (!isLoading) {
+			dispatch(updateTxState([...(data?.transactions as Array<Transaction>)]))
+		}
+	}, [isLoading, dispatch, data])
+
 
 	if (isLoading) {
 		return (

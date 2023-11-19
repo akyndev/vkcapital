@@ -1,4 +1,4 @@
-import { Loader, MoreHorizontal } from "lucide-react"
+import { Loader, Loader2, MoreHorizontal } from "lucide-react"
 import React from "react"
 import { Button } from "./ui/button"
 import { Skeleton } from "./ui/skeleton"
@@ -15,7 +15,7 @@ const DashboardLoader = () => {
 						<p className="text-sm capitalize text-muted-foreground font-medium">
 							last interest
 						</p>
-						<div className="mt-3  space-x-2">
+						<div className="mt-3 flex items-center gap-4 flex-wrap">
 							<Button className="rounded-full w-32 ">Top up</Button>
 							<Button
 								className="rounded-full w-32 text-[#369A40]"
@@ -52,12 +52,19 @@ const DashboardLoader = () => {
 						</div>
 					</div>
 				</div>
-				
+
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					<div className="bg-white rounded-lg p-6">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="font-extrabold text-xl">Latest transactions</h3>
-							<MoreHorizontal />
+							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+								Latest transactions
+							</h3>
+							<Button
+								disabled
+								variant={"ghost"}
+								className="text-primary px-2 py-1 font-semibold">
+								See More
+							</Button>
 						</div>
 						<div className="space-y-4">
 							<div className="flex items-start space-x-4">
@@ -89,13 +96,13 @@ const DashboardLoader = () => {
 					</div>
 					<div className="bg-white rounded-lg p-6 h-max lg:h-full flex flex-col">
 						<div className="flex items-center justify-between mb-3">
-							<h3 className="font-extrabold text-xl">Investment</h3>
+							<h3 className="md:font-extrabold font-bold text-lg md:text-xl">
+								Deposit Calculator
+							</h3>
 							<MoreHorizontal />
 						</div>
 						<div className="flex-1 flex items-center justify-center h-56 lg:h-auto">
-							<div className="animate-spin">
-								<Loader />
-							</div>
+							<Loader2 className="animate-spin" />
 						</div>
 					</div>
 				</div>
