@@ -104,7 +104,7 @@ const Login = () => {
 						)}
 					</div>
 
-					<Button disabled={status === "loading" || loading} className="w-full">
+					<Button disabled={status === "loading" || loading} type="submit" className="w-full">
 						<span>{loading ? "Signing in..." : "Sign in"}</span>
 					</Button>
 
