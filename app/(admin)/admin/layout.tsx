@@ -7,6 +7,10 @@ import { useSession } from "next-auth/react"
 import Link from "next/link"
 import React, { useEffect } from "react"
 
+export const dynamic = "force-dynamic"
+export const revalidate = 0
+export const fetchCache = "force-no-store"
+
 const adminArr = [
 	"rnrwakonda@gmail.com",
 	"kuzzogrind@gmail.com",

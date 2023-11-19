@@ -2,22 +2,23 @@
 import TxTable from "@/components/tx-table"
 import TxLoader from "@/components/txLoader"
 import { updateTxState, useDispatch, useSelector } from "@/lib/redux"
-import { selectTx } from "@/lib/redux/slices/selectors"
-import { Transaction, User } from "@/lib/types"
+import { selectTx, selectTxOpenNav } from "@/lib/redux/slices/selectors"
+import { User } from "@/lib/types"
 import { cn } from "@/lib/utils"
 import { userSchema } from "@/prisma/schema"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
-import useSwr from "swr"
-import { selectTxOpenNav } from "@/lib/redux/slices/selectors"
+import useSWR from "swr"
 
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET" }).then((res) => res.json())
+	fetch(rest, { method: "GET", next: { revalidate: 0 } }).then((res) =>
+		res.json(),
+	)
 
 const Transactions = () => {
 	const tx = useSelector(selectTx)
 	const { data: session, status } = useSession({ required: true })
-	const { data, isLoading, error } = useSwr<User>(
+	const { data, isLoading, error } = useSWR<User>(
 		`/api/${session?.user?.email}`,
 		fetcher,
 	)

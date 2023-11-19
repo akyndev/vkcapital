@@ -8,14 +8,14 @@ import { userSchema } from "@/prisma/schema"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { useEffect } from "react"
-import useSwr from "swr"
+import useSWR from "swr"
 
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET" }).then((res) => res.json())
+	fetch(rest, { method: "GET", next: { revalidate: 0 } }).then((res) => res.json())
 
 export default function Home() {
 	const { data: session, status } = useSession({ required: true })
-	const { data, isLoading, error } = useSwr<User>(
+	const { data, isLoading, error } = useSWR<User>(
 		`/api/${session?.user?.email}`,
 		fetcher,
 	)

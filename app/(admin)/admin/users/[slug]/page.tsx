@@ -19,17 +19,19 @@ import { cn, formattedValue } from "@/lib/utils"
 import dynamic from "next/dynamic"
 import { notFound } from "next/navigation"
 import { useEffect } from "react"
-import useSwr from "swr"
+import useSWR from "swr"
 
 const TxTable = dynamic(() => import("../../../../../components/tx-table"), {
 	ssr: false,
 })
 
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET" }).then((res) => res.json())
+	fetch(rest, { method: "GET", next: { revalidate: 0 } }).then((res) =>
+		res.json(),
+	)
 
 const UserPage = ({ params }: { params: { slug: string } }) => {
-	const { data, isLoading, error } = useSwr<User & { message: string }>(
+	const { data, isLoading, error } = useSWR<User & { message: string }>(
 		`/api/${params.slug}`,
 		fetcher,
 	)

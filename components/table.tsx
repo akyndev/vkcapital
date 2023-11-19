@@ -1,9 +1,5 @@
 "use client"
-import {
-	updateAllUsersState,
-	useDispatch,
-	useSelector
-} from "@/lib/redux"
+import { updateAllUsersState, useDispatch, useSelector } from "@/lib/redux"
 import { selectAllUsers } from "@/lib/redux/slices/selectors"
 import { User } from "@/lib/types"
 import { formattedValue } from "@/lib/utils"
@@ -11,13 +7,15 @@ import { Trash2 } from "lucide-react"
 import moment from "moment"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import useSwr from "swr"
+import useSWR from "swr"
 import DeleteDialog from "./confirm-delete"
 import { Skeleton } from "./ui/skeleton"
 
 const allUser = ["", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 const fetcher = (...rest: any) =>
-	fetch(rest, { method: "GET" }).then((res) => res.json())
+	fetch(rest, { method: "GET", next: { revalidate: 0 } }).then((res) =>
+		res.json(),
+	)
 
 const Table = () => {
 	const router = useRouter()
@@ -25,7 +23,7 @@ const Table = () => {
 	const [open, setOpen] = useState(false)
 	const [email, setEmail] = useState("")
 	const users = useSelector(selectAllUsers)
-	const { data, isLoading, error } = useSwr<{ data: User[] }>(
+	const { data, isLoading, error } = useSWR<{ data: User[] }>(
 		"/api/users",
 		fetcher,
 	)
