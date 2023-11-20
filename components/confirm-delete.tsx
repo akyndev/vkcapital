@@ -66,17 +66,20 @@ const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 						account and remove your data from our servers.
 					</DialogDescription>
 					<DialogFooter>
+						<div className="flex items-center justify-end gap-4 mt-2">
+
 						<Button
 							variant={"outline"}
-							className="w-32"
+							className="w-full xs:w-32"
 							onClick={() => setOpen(false)}>
 							Cancel
 						</Button>
 						<Button
 							onClick={handleDelete}
-							className="bg-destructive hover:bg-red-700 w-32">
+							className="bg-destructive hover:bg-red-700 w-full xs:w-32">
 							{deleting ? <Loader2 className="animate-spin" /> : "Delete"}
 						</Button>
+							</div>
 					</DialogFooter>
 				</DialogHeader>
 			</DialogContent>
