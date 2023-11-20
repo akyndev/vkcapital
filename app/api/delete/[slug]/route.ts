@@ -9,17 +9,24 @@ export async function DELETE(
 ) {
 	const email = params.slug
 	try {
-		 await prisma.user.delete({
+		const user = await prisma.user.update({
 			where: {
 				email,
 			},
-			include: {
-				transactions: true,
+			data: {
+				transactions: {
+					deleteMany: {},
+				},
 			},
-         })
-        
+		})
+		await prisma.user.delete({
+			where: {
+				email,
+			},
+		})
+
 		return NextResponse.json({ message: "user deleted" }, { status: 200 })
-	} catch (error : any) {
+	} catch (error: any) {
 		console.log(error)
 		return NextResponse.json({ message: error.message }, { status: 500 })
 	}

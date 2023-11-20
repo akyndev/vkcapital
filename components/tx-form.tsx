@@ -21,10 +21,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select"
-import { useDispatch, useSelector } from "@/lib/redux"
+import { updateTxCloseState, useDispatch, useSelector } from "@/lib/redux"
 import { createTx } from "@/lib/redux/slices/thunks"
 import { selectTxClose, selectTxStatus } from "@/lib/redux/slices/selectors"
 import { Loader2 } from "lucide-react"
+import { useToast } from "./ui/use-toast"
+import { ToastAction } from "./ui/toast"
 
 const TxForm = ({ userId }: { userId: string }) => {
 	const [tx, setTx] = useState<{ type: "TOPUP" | "WITHDRAW"; amount: number }>({
@@ -37,6 +39,7 @@ const TxForm = ({ userId }: { userId: string }) => {
 	const status = useSelector(selectTxStatus)
 	const close = useSelector(selectTxClose)
 	const dispatch = useDispatch()
+	const { toast } = useToast()
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -50,8 +53,24 @@ const TxForm = ({ userId }: { userId: string }) => {
 	useEffect(() => {
 		if (status === "idle" && open && close) {
 			setOpen(false)
+			dispatch(updateTxCloseState())
+			toast({
+				variant: "success",
+				title: "User Update",
+				description: "user information updated successfully",
+			})
 		}
-	}, [status, open, close])
+		if (status === "failed" && open && close) {
+			setOpen(false)
+			dispatch(updateTxCloseState())
+			toast({
+				variant: "destructive",
+				title: "Uh oh! Something went wrong.",
+				description: "There was a problem with your request.",
+				action: <ToastAction altText="Try again">Try again</ToastAction>,
+			})
+		}
+	}, [status, open, close, dispatch, toast])
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -103,7 +122,11 @@ const TxForm = ({ userId }: { userId: string }) => {
 					</div>
 					<DialogFooter>
 						<Button type="submit" className="w-4/12">
-							{status === "loading" ? <Loader2 className="animate-spin" /> : "Save changes"}
+							{status === "loading" ? (
+								<Loader2 className="animate-spin" />
+							) : (
+								"Save changes"
+							)}
 						</Button>
 					</DialogFooter>
 				</form>

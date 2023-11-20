@@ -7,7 +7,7 @@ const initialState: TxSliceState = {
 	value: [],
 	openNav: false,
 	status: "idle",
-	close: false
+	close: false,
 }
 
 export const txSlice = createSlice({
@@ -17,9 +17,12 @@ export const txSlice = createSlice({
 		updateTxState: (state, action) => {
 			state.value = action.payload
 		},
-		openNav: (state, ) => {
+		updateTxCloseState: (state) => {
+			state.close = false
+		},
+		openNav: (state) => {
 			state.openNav = !state.openNav
-		}
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -34,13 +37,12 @@ export const txSlice = createSlice({
 			})
 			.addCase(createTx.rejected, (state) => {
 				state.status = "failed"
-				state.close = true
-
+				state.close = false
 			})
 	},
 })
 
-export const { updateTxState, openNav } = txSlice.actions
+export const { updateTxState, openNav, updateTxCloseState } = txSlice.actions
 
 /* Types */
 export interface TxSliceState {

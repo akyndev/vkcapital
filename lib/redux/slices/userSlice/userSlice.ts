@@ -30,6 +30,9 @@ export const userSlice = createSlice({
 		updateUserState: (state, action) => {
 			state.value = action.payload
 		},
+		updateUserCloseState: (state) => {
+			state.close = false
+		},
 		updateAllUsersState: (state, action) => {
 			state.users = action.payload
 		},
@@ -47,7 +50,7 @@ export const userSlice = createSlice({
 			})
 			.addCase(updateUser.rejected, (state) => {
 				state.status = "failed"
-				state.close = true
+				state.close = false
 			})
 			.addCase(getAllUsers.pending, (state) => {
 				state.status = "loading"
@@ -62,7 +65,8 @@ export const userSlice = createSlice({
 	},
 })
 
-export const { updateUserState, updateAllUsersState } = userSlice.actions
+export const { updateUserState, updateAllUsersState, updateUserCloseState } =
+	userSlice.actions
 
 /* Types */
 export interface UserSliceState {

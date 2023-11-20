@@ -1,5 +1,10 @@
 "use client"
-import { updateUser, useDispatch, useSelector } from "@/lib/redux"
+import {
+	updateUser,
+	updateUserCloseState,
+	useDispatch,
+	useSelector,
+} from "@/lib/redux"
 import { selectUserClose, selectUserStatus } from "@/lib/redux/slices/selectors"
 import { Loader2 } from "lucide-react"
 import React, { useEffect, useState } from "react"
@@ -24,8 +29,18 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./ui/select"
+import { useToast } from "./ui/use-toast"
+import { ToastAction } from "./ui/toast"
 
-const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: number, uInterest: number }) => {
+const AdminForm = ({
+	email,
+	uBalance,
+	uInterest,
+}: {
+	email: string
+	uBalance: number
+	uInterest: number
+}) => {
 	const [user, setUser] = useState<{
 		balance: number
 		interest: number
@@ -39,6 +54,7 @@ const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: nu
 	const status = useSelector(selectUserStatus)
 	const close = useSelector(selectUserClose)
 	const [open, setOpen] = useState(false)
+	const { toast } = useToast()
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -51,8 +67,24 @@ const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: nu
 	useEffect(() => {
 		if (status === "idle" && open && close) {
 			setOpen(false)
+			dispatch(updateUserCloseState())
+			toast({
+				variant: "success",
+				title: "User Update",
+				description: "user information updated successfully"
+			})
 		}
-	}, [status, open, close])
+		if (status === "failed" && open && close) {
+			setOpen(false)
+			dispatch(updateUserCloseState())
+			toast({
+				variant: "destructive",
+				title: "Uh oh! Something went wrong.",
+				description: "There was a problem with your request.",
+				action: <ToastAction altText="Try again">Try again</ToastAction>,
+			})
+		}
+	}, [status, open, close, dispatch, toast])
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -78,7 +110,6 @@ const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: nu
 							</Label>
 							<Input
 								type="number"
-								
 								onChange={(e) =>
 									setUser({ ...user, balance: Number(e.currentTarget.value) })
 								}
@@ -95,7 +126,6 @@ const AdminForm = ({ email, uBalance, uInterest }: { email: string, uBalance: nu
 							</Label>
 							<Input
 								type="number"
-								
 								onChange={(e) =>
 									setUser({ ...user, interest: Number(e.currentTarget.value) })
 								}
