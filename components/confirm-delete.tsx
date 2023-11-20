@@ -10,9 +10,15 @@ import {
 import { Button } from "./ui/button"
 import axios from "axios"
 import { useToast } from "./ui/use-toast"
-import { getAllUsers, useDispatch } from "@/lib/redux"
+import {
+	getAllUsers,
+	updateAllUsersState,
+	useDispatch,
+	useSelector,
+} from "@/lib/redux"
 import { ToastAction } from "./ui/toast"
 import { Loader2 } from "lucide-react"
+import { selectAllUsers } from "@/lib/redux/slices/selectors"
 
 type DialogProps = {
 	open: boolean
@@ -23,6 +29,7 @@ type DialogProps = {
 const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 	const { toast } = useToast()
 	const dispatch = useDispatch()
+	const users = useSelector(selectAllUsers)
 	const [deleting, setDeleting] = useState(false)
 
 	const handleDelete = async () => {
@@ -30,9 +37,10 @@ const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 		try {
 			await axios.delete(`/api/delete/${email}`)
 			setDeleting(false)
-			dispatch(getAllUsers())
-            toast({
-                variant: "success",
+			const newList = users.filter((user) => user.email !== email)
+			dispatch(updateAllUsersState(newList))
+			toast({
+				variant: "success",
 				description: "User successfully deleted",
 			})
 		} catch (error) {
@@ -44,7 +52,7 @@ const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 				action: <ToastAction altText="Try again">Try again</ToastAction>,
 			})
 		}
-        setOpen(false)
+		setOpen(false)
 		setDeleting(false)
 	}
 
@@ -58,7 +66,10 @@ const DeleteDialog = ({ open, setOpen, email }: DialogProps) => {
 						account and remove your data from our servers.
 					</DialogDescription>
 					<DialogFooter>
-						<Button variant={"outline"} className="w-32" onClick={() => setOpen(false)}>
+						<Button
+							variant={"outline"}
+							className="w-32"
+							onClick={() => setOpen(false)}>
 							Cancel
 						</Button>
 						<Button

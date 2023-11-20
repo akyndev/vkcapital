@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/authOptions"
 import { NextRequest, NextResponse } from "next/server"
 
+export const revalidate = true
+
 export async function DELETE(
 	req: NextRequest,
 	{ params }: { params: { slug: string } },
