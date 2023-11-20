@@ -47,6 +47,7 @@ export const userSlice = createSlice({
 			})
 			.addCase(updateUser.rejected, (state) => {
 				state.status = "failed"
+				state.close = true
 			})
 			.addCase(getAllUsers.pending, (state) => {
 				state.status = "loading"

@@ -34,6 +34,8 @@ export const txSlice = createSlice({
 			})
 			.addCase(createTx.rejected, (state) => {
 				state.status = "failed"
+				state.close = true
+
 			})
 	},
 })
