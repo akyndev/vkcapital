@@ -2,15 +2,17 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { logo } from "@/lib"
 import { Auth } from "@/lib/types"
 import { authSchema } from "@/prisma/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
 import { Eye, EyeOff } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 const Register = () => {
@@ -26,6 +28,13 @@ const Register = () => {
 	const router = useRouter()
 	const err = useSearchParams().get("error")
 	const [showPassword, setShowPassword] = useState(false)
+
+
+	useEffect(() => {
+		if (session && session.user) {
+			router.push("/")
+		}
+	},[session, router])
 
 	const onSumbit = async (e: Auth) => {
 		setLoading(true)
@@ -44,17 +53,28 @@ const Register = () => {
 
 	return (
 		<>
-			<div className="justify-end flex w-full">
-				<Link href={"/auth/login"}>
-					<Button className="rounded-full w-36">Login</Button>
-				</Link>
-			</div>
+			<nav className="fixed top-0 pt-6 lg:pt-8 inset-x-0 lg:px-8">
+				<div className="container flex items-center justify-between">
+					<Image
+						src={logo}
+						alt="logo"
+						width={70}
+						height={60}
+						className="sm:block lg:hidden"
+					/>
+					<div className="flex justify-end w-full">
+						<Link href={"/auth/login"}>
+							<Button className="rounded-full w-36">Login</Button>
+						</Link>
+					</div>
+				</div>
+			</nav>
 			<div className="text-center flex-1 items-center justify-center flex flex-col">
 				<div className="mx-auto w-full lg:w-max my-6">
 					<h1 className="text-4xl font-semibold tracking-tighter">
 						Get Started
 					</h1>
-					<p className="w-full lg:w-96 text-sm lg:text-base">
+					<p className="w-full sm:w-[390px] text-sm lg:text-base">
 						The best time to plant a tree was 20 years ago. The second-best time
 						is now. Similarly, the best time to start investing was yesterday,
 						but the next best time is today.

@@ -2,14 +2,16 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { logo } from "@/lib"
 import { Login as Auth } from "@/lib/types"
-import { authSchema, loginSchema } from "@/prisma/schema"
+import { loginSchema } from "@/prisma/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Eye, EyeOff } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
+import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 const Login = () => {
@@ -20,11 +22,17 @@ const Login = () => {
 		reset,
 	} = useForm<Auth>({ resolver: zodResolver(loginSchema) })
 
-	const { data, status } = useSession()
+	const { data: session, status } = useSession()
 	const router = useRouter()
 	const err = useSearchParams().get("error")
 	const [loading, setLoading] = useState(false)
 	const [showPassword, setShowPassword] = useState(false)
+	
+	useEffect(() => {
+		if (session && session.user) {
+			router.push("/")
+		}
+	}, [session, router])
 
 	const onSumbit = (e: Auth) => {
 		setLoading(true)
@@ -40,11 +48,22 @@ const Login = () => {
 
 	return (
 		<>
-			<div className="justify-end flex w-full">
-				<Link href={"/auth/register"}>
-					<Button className="rounded-full w-36">Register</Button>
-				</Link>
-			</div>
+			<nav className="fixed top-0 pt-6 lg:pt-8 inset-x-0 lg:px-8">
+				<div className="container flex items-center justify-between">
+					<Image
+						src={logo}
+						alt="logo"
+						width={70}
+						height={60}
+						className="sm:block lg:hidden"
+					/>
+					<div className="justify-end flex w-full">
+						<Link href={"/auth/register"}>
+							<Button className="rounded-full w-36">Register</Button>
+						</Link>
+					</div>
+				</div>
+			</nav>
 			<div className="text-center flex-1 items-center justify-center flex flex-col">
 				<div className="mx-auto w-full lg:w-max my-6">
 					<h1 className="text-4xl font-semibold tracking-tighter">
